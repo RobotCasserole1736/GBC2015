@@ -154,8 +154,8 @@ button:active {
 
 body {
     background: #222;
-    padding: 1em;
-    margin: 0;
+    padding: 2em;
+    margin: 1.5;
     font-size: 16px;
     font-family: helvetica, sans-serif;
     color: #FF9933;
@@ -210,7 +210,7 @@ input[type=checkbox]:checked {
 }
 
 input[type="number"], button {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     color:#D1FFD1
 }
 
@@ -342,7 +342,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="number"] {
-    width: 4.0em;
+    width: 1.8em;
 }
 
 #Comments {
@@ -373,7 +373,7 @@ li {
 #stacks {
     display: inline-block;
     vertical-align: middle;
-    float: left;
+    margin: 5px;
 }
 
 #StartLocation, #TeleopSliders, #TeleScoring, #frm_loading_location, #FeatureComments {
