@@ -158,16 +158,16 @@ body {
     margin: 0;
     font-size: 16px;
     font-family: helvetica, sans-serif;
-    color: #FF9933;
+    color: #777;
 }
 
 input[type="text"], input[type="tel"], input[type="number"], input[type="checkbox"], textarea, select {
     border: 1px solid #111;
     padding: 0.5em;
-    font-size: 19px;
+    font-size: 15px;
     line-height: 1.2em;
     background: #444;
-    color: #999
+    color: #fff;
     font-family: helvetica, sans-serif;
     background: -webkit-gradient(linear, left top, left bottom, from(#222), to(#444));
     -webkit-appearance: none;
@@ -211,7 +211,6 @@ input[type=checkbox]:checked {
 
 input[type="number"], button {
     margin-bottom: 12px;
-    color:#D1FFD1
 }
 
 #slider {
@@ -365,15 +364,10 @@ li {
     display: inline-block;
 }
 
-#FeatureDataStrings, #FeatureValues, #TeleopSliders, #position, #FeatureComments, #teamLabel, #teamDisp {
+#FeatureDataStrings, #FeatureValues, #BallsAndPoints, #StartLocation, #ShootingData, #TeleopSliders, #position, #BallsAndPoints,#TeleScoring,
+#MatchDataStrings, #MatchDataValues, #frm_loading_location, #frm_shooting_location, #FeatureComments, #teamLabel, #teamDisp {
     display: inline-block;
     vertical-align: middle;
-}
-
-#stacks {
-    display: inline-block;
-    vertical-align: middle;
-    float: left;
 }
 
 #StartLocation, #TeleopSliders, #TeleScoring, #frm_loading_location, #FeatureComments {
