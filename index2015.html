@@ -184,18 +184,20 @@
                     <h2>Back Scoring Platform:</h2><br>
                     
                     <div id=stacks>
-                    Stacks: <br>
-                    Litter: <br><br>
+                    Stacks: <br><br>
+                    Litter: <br>
                     Bin: <br><br>
                     Totes: <br><br>
-                    Knocked Over:<br>
+                    Knocked Over:<br><br>
+                    Points:<br><br>
                     </div>
                     
                     <div id=stacks>Stack1<br>
-                    <input type="checkbox" name="stack1Litter" id="Stack1Litter"/><br>
-               		<input type="checkbox" name="stack1Bin" id="Stack1Bin"/><br>
-               		<input type="number" name="stack1Totes" id="Stack1Totes" min="0" max="6" size=8/><br>
-                    <input type="checkbox" name="s7knockedOver" id="S7KnockedOver"/><br>
+                    <input type="checkbox" name="stack1Litter" id="S1Litter" onchange="disp_update();"/><br>
+               		<input type="checkbox" name="stack1Bin" id="S1Bin" onchange="disp_update();"/><br>
+               		<input type="number" name="stack1Totes" id="S1Totes" min="0" max="6" size=8 onchange="disp_update();"/><br>
+                    <input type="checkbox" name="s7knockedOver" id="S1KnockedOver" onchange="disp_update();"/><br><br>
+                    <a id="S1points"> </a>
 					</div>
 										
                     <div id=stacks>Stack2:<br>

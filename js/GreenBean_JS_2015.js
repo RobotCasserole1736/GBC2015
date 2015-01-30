@@ -23,44 +23,28 @@ window.onload=function(){Update_Stuff(); Hide_Tabs();};
     var penalty_stack = new Array();
 
 /* autonomous */
-    var auto_goals = new Array();
-    auto_goals[0] = new goal_t(0,0,0,0,0,0);
-    auto_goals[1] = new goal_t(0,0,0,0,0,0);
+    var auto_sets = new autostacks(0,0,0,0,0,0);  	// auto-sets - robot sets, tote sets, stacked sets, bin sets
 
-	var tele_attempts_made = [0,0,0];
-	var tele_attempts_miss = [0,0,0];
-
-    var auto_starting_ball = 0;
-    var auto_floor_ball = 0;
-    var auto_in_area = 0;
+    var auto_in_area = 0;						  	// true if this robot was in the auto zone by end of autonomous
+    var auto_totes = 0; 							// # yellow totes this bot got into auto zone in autonomous
+    var auto_stacks = 0; 							// # yellow totes stacked by this bot in auto zone in autonomous
+    var auto_bins = 0;								// # bins this bot got into auto zone in autonomous
     
-    var auto_score_stack = new Array();
-
 /* teleoperated */
-    var tele_stacks = new Array();
-    tele_stacks[0] = new stacks(0,0,0,0);
+    var Stack1 = new stacks(0,0,0,0),
+    	Stack2 = new stacks(0,0,0,0),
+    	Stack3 = new stacks(0,0,0,0),
+    	Stack4 = new stacks(0,0,0,0);					// array for stack objects 
+    //Tstacks[0] = new stacks(0,0,0,0,0);			// a stereotypical stack object set to zero...
        
-    var tele_front_court = 0;
-    var tele_full_court = 0;
-    var tele_human_loading = 0;    
-    var tele_floor_loading = 0;
+    var human_tote_loader = 0;						// did they have a human player loading totes?
+    var human_litter_loader = 0;					// did they have a human player loading litter from slot?
+    var human_litter_thrower = 0;    				// did they have a human player throwing litter across the field? 
+
+    var tele_driving = 0;							// slider for driving ability 
+    var tele_robot_litter_time = 0;					// time this bot spent dealing with litter cleanup to landfill
+    var post_overallrating = 0;						// slider for general rating for this bot
     
-    var low_pass = 0;
-    var high_pass = 0;
-    var high_goal = 0;
-    var low_goal = 0;
-    var low_top = 0;
-    
-    var pass_catch = 0;
-    var truss_catch = 0;
-    
-    var tele_driving = 0;
-    var tele_robot_block = 0;
-    var tele_robot_block_time = 0;
-    var post_overallrating = 0;
-    
-    var tele_score_stack = new Array();
-    var tele_attempts_score_stack = new Array();
 
 /******************************************************************************
  * Internal Functions
@@ -74,19 +58,72 @@ window.onload=function(){Update_Stuff(); Hide_Tabs();};
  *   totes - number of totes  [# of scored totes in a stack (0-6)]
  *   bins  - is there a bin on this stack? 0 or 1
  *   litter - is there litter in the bin?  0 or 1
+ *   knockedover - did they build it up only for it to get knocked over? 0 or 1
  *   points (output?) - calculated points for this stack
+ * 	
  * */
-function stacks(totes, bins, litter, points)
+function stacks(totes, bins, litter, knockedover)
 {
-	this.totes= totes;
-    this.bins = bins;
-    this.litter = litter;
-    this.points = this.totes*2  							/* points for totes on scoring platform  */
-    this.points = this.points + this.bins*(this.totes*4);   /* points for bins on scored tote stacks  */
-    this.points = this.points + (litter * 6)
-    
+	// get info
+	this.totes= totes;											// stacks start with totes. 
+    this.bins = bins;											// bins on tote stacks 
+    this.litter = litter;										// litter in a stacked bin	
+    this.knockedover = knockedover; 							// sadly no points if this is true...
 }
 
+function stackpoints(totes, bins, litter, knockedover) 
+{   
+    var points = 0;
+    
+    // calculate points
+    points = this.totes;  								// 2 points for each tote in this stack on scoring platform  
+    points = points + (this.bins * (this.totes * 4));   // 4 points per level for bins on scored tote stacks  
+    //points = points + (litter * 6);					// points for litter in a scored bin
+    //if (this.knockedover)
+    //	{points = 0;}										// all that work for NOTHING!
+    return points;
+}
+
+/* constructor for autostack objects 
+ *
+ *   stacks function calculates points for stacks on scoring platforms
+ * 	 bots - bool - true if all robots in auto zone at end of autonomous
+ *   totes - number of totes in auto zone at end of autonomous
+ *   stackedtotes - bool - true if all totes are in a stack at end of autonomous
+ *   bins  - number of bins in auto zone at end of autonomous
+ *   
+ *   points (output?) - calculated points for this stack
+ * 		if all robots in autozone = 4 pts
+ * 		if all 3 yellow totes in autozone = 6 pts
+ * 		if all 3 yellow totes stacked in autozone = 20 pts
+ * 		if all 3 bins in autozone = 8 pts
+ * 		
+ * */
+function autostacks(bots, totes, stackedtotes, bins, points)
+{
+	// get the information
+	this.bots = bots;
+	this.totes= totes;
+	this.stackedtotes = stackedtotes;
+    this.bins = bins;
+    
+    // calculate points...
+    if (this.bots)								// true if all bots in auto zone
+    	{this.points = 4;	}  					// 4 points for robot set
+    if (this.totes = 3)							//must have all 3 yellow totes in auto zone
+    { if (this.stackedtotes) 					// true if all 3 yellow totes are stacked
+    	{this.points = this.points + 20;	} 	// add 20 if stacked tote set!
+    	else
+    	{this.points = this.points + 6;	}		// otherwise add 6 points for tote set
+    }
+    if (this.bins = 3)
+    {
+    	this.points = this.points + 8			// 8 points for bin set
+    }
+    return this.points
+    
+    
+}
 /*
  * Update Scoring Data
  */
@@ -94,12 +131,23 @@ function update_data()
 { 
 	   /* autonomous data */
        /*        
-         auto_starting_ball = document.getElementById('starting_ball').checked;
+        auto_starting_ball = document.getElementById('starting_ball').checked;
         auto_floor_ball = document.getElementById('floor_pickup').checked;
         auto_in_area = document.getElementById('in_area').checked;
-		*/    
+       */  
+        
     /* teleop data */
-       /*
+       
+        human_tote_loader = document.getElementById('Human_feedsTotes').checked;
+        human_litter_loader = document.getElementById('Human_feedsLitter').checked;
+        human_litter_thrower = document.getElementById('Human_throwsLitter').checked;
+
+		Stack1.totes = document.getElementById('S1Totes').value;
+		Stack1.bin = document.getElementById('S1Bin').checked;
+		Stack1.litter = document.getElementById('S1Litter').checked;
+		Stack1.knockedover = document.getElementById('S1KnockedOver').checked;					
+
+/*
         tele_front_court = document.frm_shooting_location.shooting_location[0];
         tele_full_court = document.frm_shooting_location.shooting_location[1];
 
@@ -110,11 +158,6 @@ function update_data()
         tele_robot_block = document.getElementById('robot_block').value;
         tele_robot_block_time = document.getElementById('robot_block_time').value;
         
-        low_pass = document.getElementById('low_pass').checked;
-        high_pass = document.getElementById('high_pass').checked;
-		high_goal = document.getElementById('high_goal').checked;
-        low_goal = document.getElementById('low_goal').checked;
-        low_top = document.getElementById('low_top').checked;
         
         pass_catch = document.getElementById('pass_catch').checked;
         truss_catch = document.getElementById('truss_catch').checked;
@@ -133,7 +176,7 @@ function update_data()
  */
 function disp_update()
 {
-     /* autonomous */
+   /* autonomous */
    /*
      document.getElementById("auto_pts_display").innerHTML = auto_goals[0].points;   /* points made in auton */
    /*  document.getElementById("auto_miss_display").innerHTML = auto_goals[1].points;  /* points missed in auton */
@@ -151,6 +194,8 @@ function disp_update()
     document.getElementById("truss_catch_miss_display").innerHTML = tele_attempts_miss[2];
      
     */
+   document.getElementById("S1points").innerHTML = stackpoints(Stack1.totes, Stack1.bin, Stack1.litter, Stack1.KnockedOver);
+   
     switch(tele_driving)
     {
         case '0':
@@ -196,119 +241,7 @@ function disp_update()
 
 }
 
-/*
- * Updates the points values
- */
-function update_points()
-{
-    /* update the autonomous point total */
-    sum_points(auto_goals[0]);
-    sum_points(auto_goals[1]);
-    /* update the teleop point total */
-    sum_points(tele_goals[0]);
-    sum_points(tele_goals[1]);
-}
 
-/* 
- * summation of points
- */
-function sum_points(var_config)
-{
-    /* hot goal in auton */
-    if (var_config === auto_goals[0] || var_config === auto_goals[1] )
-    {
-    	var_config.points = 20 * var_config.hot_high +
-    						15 * var_config.high +
-    						11 * var_config.hot_low +
-                        	6 * var_config.low +
-                        	5 * var_config.in_area;
-    }
-    else
-    {
-		var_config.points = 10 * var_config.high +
-                        	1 * var_config.low;
-    }
-}
-
-// Replaced new_ball_score so that an undo score function could be easily added
-function new_ball_score(period, status, goal)
-{
-    score_change(period, status, goal, 1);
-}
-
-/* 
- * new_ball_score
- */
-function score_change(period, status, goal, change)
-{
-    var status_l;
-    
-    switch(status)
-    {
-    case 'make':
-        status_l = 0; break;
-    case 'miss':
-        status_l = 1; break;
-    }
-            
-    /* autonomous */
-    if ( period === 'autonomous')
-    {
-        if(change > 0)
-            auto_score_stack.push([status, goal]);
-        auto_goals[status_l][goal]=auto_goals[status_l][goal]+change;
-    }
-    
-    /* teleoperated */
-    if ( period === 'teleop')
-    {
-        if(change > 0)
-            tele_score_stack.push([status, goal]);
-        tele_goals[status_l][goal]=tele_goals[status_l][goal]+change;
-    }
-
-}            
-
-function tele_attempt_change(status, type, change)
-{   
-	change = parseInt(change);
-    if(change > 0)
-    {
-    	tele_attempts_score_stack.push([status, type]);
-    }
-    else if(change < 0)
-    {
-    	var undo_values = tele_attempts_score_stack.pop();
-    	status = undo_values[0];
-    	type = undo_values[1];
-    }
-
-    if(status === "made")
-    {
-    	tele_attempts_made[type] = tele_attempts_made[type] + change;
-    }
-    else if(status === "miss")
-    {
-    	tele_attempts_miss[type] = tele_attempts_miss[type] + change;
-    }
-    
-    Update_Stuff();
-}
-
-/*
- * Assess a penalty
- */
-function new_penalty(type)
-{
-    switch(type)
-    {
-        case 'penalty':
-            penalty =++ penalty; penalty_stack.push('penalty');break;
-        case 'technical':
-            technical =++ technical; penalty_stack.push('technical'); break;
-    }
-    
-}
 
 function save_data()
 {
@@ -317,7 +250,7 @@ function save_data()
     matchData += document.getElementById("match_number_in").value + ",";
     matchData += document.getElementById("match_type").value + ",";
   // autonomous tab fields 
-    matchData += (document.getElementById("starting_ball").checked ? "T" : "F") + ",";
+/*    matchData += (document.getElementById("starting_ball").checked ? "T" : "F") + ",";
     matchData += (document.getElementById("floor_pickup").checked ? "T" : "F") + ",";
     matchData += (document.getElementById("in_area").checked ? "T" : "F") + ",";
     matchData += document.getElementById("auto_pts_display").innerHTML + ",";
@@ -398,7 +331,7 @@ function save_data()
     else
         localStorage.setItem("MatchData",existingData + matchData);
     document.getElementById("HistoryCSV").value = localStorage.getItem("MatchData");
-    
+*/    
     var existingSharedData = localStorage.getItem("SharedData");
     if(existingSharedData == null)
         localStorage.setItem("SharedData",sharedData);
@@ -412,13 +345,14 @@ function save_data()
 
 function save_pit_data()
 {
+   
     var pitData = document.getElementById("scout_name_in").value + ",";
     pitData += document.getElementById("team_number_in").value + ",";
     pitData += document.getElementById("match_number_in").value + ",";
     pitData += document.getElementById("match_type").value + ",";
 // features tab datasave
 
-    pitData += document.getElementById("drive_type").value + ",";
+/*    pitData += document.getElementById("drive_type").value + ",";
     pitData += document.getElementById("drive_speed").value + ",";
     pitData += document.getElementById("number_wheels").value + ",";
     pitData += (document.getElementById("low_pass").checked ? "T" : "F") + ","; // chkbox
@@ -446,7 +380,7 @@ function save_pit_data()
      comments = comments.replace(",","_"); //Get rid of commas so we don't mess up CSV
      comments = comments.replace(/(\r\n|\n|\r)/gm,"  "); // get rid of any newline characters
     pitData += comments + "\n";  // add a single newline at the end of the data
-
+*/
     var existingData = localStorage.getItem("PitData");
     if(existingData == null)
         localStorage.setItem("PitData",pitData);
@@ -462,7 +396,7 @@ function save_pit_data()
 function reset_form()
 {
    //document.getElementById("match_type").value = "Qualification";
-	
+	/*
     document.getElementById("team_number_in").value = "";
     document.getElementById("match_number_in").value = parseInt(document.getElementById("match_number_in").value) + 1;
     document.getElementById("starting_ball").value = 0;
@@ -523,7 +457,7 @@ function reset_form()
     document.getElementById("DriveTrain_Comments").value="";
     document.getElementById("Shooter_Comments").value="";
     document.getElementById("General_Comments").value="";
-    
+    */
     update_data();
 }
 
@@ -541,82 +475,7 @@ function Update_Stuff()
     update_data();
 }
 
-/*
- * Ball scored.
- */
-function Ball_Score(period, status, goal)
-{
-    /* a ball is scored */
-    new_ball_score(period, status, goal);
-    
-    /* update point totals */
-    Update_Stuff();                 
-}
-
-function Mobility_Score()
-{
-	Update_Stuff();
-	
-	if(auto_in_area)
-	{
-		Ball_Score('autonomous', 'make', 'in_area');
-	}
-	else
-	{
-		Undo_Score('autonomous');
-	}
-}
-            
-/*
- * Penalty comitted
- */
-function Penalty(type)
-{
-    new_penalty(type);
- 
-    /* update point totals */
-    Update_Stuff();
-}
-
-//Undo a score if possible
-function Undo_Score(period)
-{
-    switch(period)
-    {
-        case 'autonomous':
-            if(auto_score_stack.length > 0)
-            {
-                var scoreData = auto_score_stack.pop();
-                score_change(period, scoreData[0], scoreData[1], -1);
-            }
-            break;
-        case 'teleop':
-            if(tele_score_stack.length > 0)
-            {
-                var scoreData = tele_score_stack.pop();
-                score_change(period, scoreData[0], scoreData[1], -1);
-            }
-            break;
-    }
-    update_data();
-}
-
-//Undo a penalty if possible
-function Undo_Penalty()
-{
-    if(penalty_stack.length > 0)
-    {
-        var type = penalty_stack.pop();
-        switch(type)
-        {
-        case 'penalty':
-            penalty--; break;
-        case 'technical':
-            technical--; break;
-        }
-    }
-    update_data();
-}
+           
 
 function Submit_Report()
 {
