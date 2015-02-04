@@ -166,8 +166,8 @@ input[type="text"], input[type="tel"], input[type="number"], input[type="checkbo
     padding: 0.5em;
     font-size: 19px;
     line-height: 1.2em;
-    background: #444;
-    color: #999
+    background: #555;
+    color: #999;
     font-family: helvetica, sans-serif;
     background: -webkit-gradient(linear, left top, left bottom, from(#222), to(#444));
     -webkit-appearance: none;
@@ -175,6 +175,10 @@ input[type="text"], input[type="tel"], input[type="number"], input[type="checkbo
     -webkit-box-shadow: 1px 1px 1px #333;
     -moz-box-shadow: 1px 1px 1px #333;
     box-shadow: 1px 1px 1px #333;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 textarea {
@@ -365,17 +369,37 @@ li {
     display: inline-block;
 }
 
-#FeatureDataStrings, #FeatureValues, #TeleopSliders, #position, #FeatureComments, #teamLabel, #teamDisp {
+#FeatureDataStrings, #FeatureValues, #AutonomousScoring, #position, #FeatureComments, #teamLabel, #teamDisp {
     display: inline-block;
     vertical-align: middle;
+}
+
+#AutonomousScoring  {
+    width: 300px;
+    margin-left: 10;
+    margin-right: auto;
+    text-align: right;
 }
 
 #stacks {
     display: inline-block;
-    vertical-align: middle;
-    margin: 5px;
+    margin-left: 8px;
+    margin-right: float;
+    text-align: center;
 }
 
+#stacks2 {
+    display: inline-block;
+    width: 55px;
+    margin-left: 5px;
+    margin-right: auto;
+}
+
+#stacks3 {
+    display: inline-block;
+    margin="20px"
+    text-align: right;
+}
 #StartLocation, #TeleopSliders, #TeleScoring, #frm_loading_location, #FeatureComments {
     margin-left: 40px;
 }

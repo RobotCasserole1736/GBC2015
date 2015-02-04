@@ -43,12 +43,12 @@
             <!-- ------------------------------ -->
             <!-- ----------Match Data---------- -->
             <!-- ------------------------------ -->
-            <div id="MatchDataStrings">
-                Scout Name<br>
-                Match Number<br>
+            <div id="stacks">
+                Scout Name<br><br>
+                Match Number<br><br>
                 Match Type
             </div>
-            <div id="MatchDataValues">
+            <div id="stacks">
                 <input type="text" name="scout_name_in" id="scout_name_in" placeholder="*"><br>
                 <input type="tel" name="match_number_in" id="match_number_in" placeholder="0"><br>
                 <select name="match_type" id="match_type" onchange="Hide_Tabs();">
@@ -117,8 +117,9 @@
             <!-- ------------------------------------- -->
 
             <!-- Need to add starting location selector here -->
-            <div id="AutonomousScoring">
-                Moved to Auto Zone: <input type="checkbox" name="in_area" id="in_area"> <br>  
+            <div id=stacks>
+              <div id="AutonomousScoring">
+                Robot to Auto Zone: <input type="checkbox" name="in_area" id="in_area"> <br>  
                	Totes to Auto Zone:	<input type="number" name="AutoTotes" id="AutoTotes" min=0 max =3 size=8/><br>
                 Totes stacked in Auto Zone: <input type="number" name="AutoStacks" id="AutoStacks" min=0 max =3 size=8/><br>       
                 Bins to Auto Zone: <input type="number" name="AutoBins" id="AutoBins" min=0 max=3 size=8/><br>   
@@ -126,23 +127,13 @@
                 Points Scored: <a id="auto_pts_display">0</a>
                 <br>
                 Points Missed: <a id="auto_miss_display">0</a>
-                <br>
-                <button onclick="Undo_Score('autonomous');">Undo</button>
-                <br>
-                <button onclick="Penalty('penalty');">Penalty</button>
-                <button onclick="Penalty('technical');">Technical Foul</button>
-                <br>
-                <a>Penalties :  </a><a id="penalty_display1">0</a>
-                <br>
-                <a>Technical Fouls :  </a><a id="technical_display1">0</a>
-                <br>
-                <button onclick="Undo_Penalty();">Undo Penalty</button>
+                <br><br><br><br><br><br><br><br><br><br><br> <br><br>             
+              </div>
             </div>
-            <div id="StartLocation">
-                <img src="img/Clip_FRC_Field_2013.jpg" height="350" width="350">
-                <br>
+            <div id=stacks>
+             <div id="StartLocation">
                 Starting Location :  
-                <select name="Location" id="Location">
+                 <select name="Location" id="Location">
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option>
@@ -153,9 +144,19 @@
                     <option value="H">H</option>
                     <option value="I">I</option>
                     <option value="J">J</option>
-                    <option value="K">GOALIE</option>  // added for goalie position DJT
-                </select>
-            </div>
+                 </select> <br>
+                <img src="img/RcyclRushField_Red.PNG" height="450" width="350">
+              </div>
+             </div>
+             <div id=stacks>
+                <button onclick="Penalty('penalty');">Penalty</button>
+                <button onclick="Penalty('technical');">Technical Foul</button>
+                <br>
+                <a>Penalties :  </a><a id="penalty_display1">0</a>
+                <br>
+                <a>Technical Fouls :  </a><a id="technical_display1">0</a>
+                <br><br><br><br><br><br><br><br><br>              
+             </div>
         </div>
         
         <div id="TeleopData">
@@ -166,16 +167,18 @@
             <div id="Human Player">
             	<form name="BinFeeder" id="binfeeder">
             		<h2>Human Player:</h2>
-            		<div id=stacks><a margin="30px">Feeds Totes: <input type="checkbox" name="human_feedsTotes" id="Human_feedsTotes"></a></div>
-            		<div id=stacks><a margin="30px">Feeds Litter: <input type="checkbox" name="human_feedsLitter" id="Human_feedsLitter"></a></div>
-            		<div id=stacks><a margin="30px">Throws Litter: <input type="checkbox" name = "human_throwsLitter" id="Human_throwsLitter"></a></div>
-                <div id=stacks><a>How's My Driving? :  </a>
-                <a id="tele_driving_display">Little or No Movement</a>
-                <div id="shortslider">
-                    <input class="bar" type="range" id ="driving_ability" name="driving_ability" min="0" max="3" value ="0" onchange="update_data();">
-                    <span class="highlight"></span>
-                </div>
-                </div>
+                    <div id=stacks3>
+                      <a>How's My Driving? :  </a> <a id="tele_driving_display">Little or No Movement</a>
+                      <div id="shortslider">
+                         <input class="bar" type="range" id ="driving_ability" name="driving_ability" min="0" max="3" value ="0" onchange="update_data();">
+                         <span class="highlight"></span>
+                       </div>
+                    </div>
+            		<div id=stacks3>
+            			<a>Feeds Totes: <input type="checkbox" name="human_feedsTotes" id="Human_feedsTotes"></a>
+            		    <a>Feeds Litter: <input type="checkbox" name="human_feedsLitter" id="Human_feedsLitter"></a>
+            		    <a>Throws Litter: <input type="checkbox" name = "human_throwsLitter" id="Human_throwsLitter"></a>
+            		</div>
             	</form>
 
             </div>
@@ -183,93 +186,93 @@
             <div id="BackField">
                     <h2>Back Scoring Platform:</h2>
                     
-                    <div id=stacks>
-                    Stacks: <br><br>
-                    Litter: <br>
-                    Bin: <br><br>
-                    Totes: <br><br>
-                    Knocked Over:<br><br>
-                    Points:<br><br>
+                    <div id=stacks3>
+                      Stacks: <br>
+                      Litter: <br>
+                      Bin: <br><br>
+                      Totes: <br><br>
+                      Knocked Over:<br><br>
+                      Points:<br><br>
                     </div>
                     
-                    <div id=stacks>Stack1<br>
+                    <div id=stacks2>Stack1<br>
                     <input type="checkbox" name="stack1Litter" id="S1Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack1Bin" id="S1Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack1Totes" id="S1Totes" min="0" max="6" size=8 onchange="update_data();"/><br>
                     <input type="checkbox" name="s1knockedOver" id="S1KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S1points"> </a>
+                    <a id="S1points"> </a> <br><br>
 					</div>
 										
-                    <div id=stacks>Stack2:<br>
+                    <div id=stacks2>Stack2:<br>
                     <input type="checkbox" name="stack2itter" id="S2Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack2Bin" id="S2Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack2Totes" id="S2Totes" min="0" max="6" onchange="update_data();"/><br>
                     <input type="checkbox" name="s2knockedOver" id="S2KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S2points"> </a>
+                    <a id="S2points"> </a> <br><br>
 					</div>
 					
-                     <div id=stacks>Stack3:<br>
+                     <div id=stacks2>Stack3:<br>
                     <input type="checkbox" name="stack3Litter" id="S3Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack3Bin" id="S3Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack3Totes" id="S3Totes" min="0" max="6" onchange="update_data();"/><br>
                     <input type="checkbox" name="s3knockedOver" id="S3KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S3points"> </a>
+                    <a id="S3points"> </a> <br><br>
 					</div>
 					
-                    <div id=stacks>Stack4:<br>
+                    <div id=stacks2>Stack4:<br>
                     <input type="checkbox" name="stack4Litter" id="S4Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack4Bin" id="S4Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack4Totes" id="S4Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s4knockedOver" id="S4KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S4points"> </a>
+                    <a id="S4points"> </a> <br><br>
 					</div>
 					
-                     <div id=stacks>Stack5:<br>
+                     <div id=stacks2>Stack5:<br>
                     <input type="checkbox" name="stack5Litter" id="S5Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack5Bin" id="S5Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack5Totes" id="S5Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s5knockedOver" id="S5KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S5points"> </a>
+                    <a id="S5points"> </a> <br><br>
 					</div>
 					
-                    <div id=stacks> Stack6:<br>
+                    <div id=stacks2> Stack6:<br>
                     <input type="checkbox" name="stack6Litter" id="S6Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack6Bin" id="S6Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack6Totes" id="S6Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s6knockedOver" id="S6KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S6points"> </a>
+                    <a id="S6points"> </a> <br><br>
 					</div>
 					
-                     <div id=stacks>Stack7:<br>
+                     <div id=stacks2>Stack7:<br>
                     <input type="checkbox" name="stack7Litter" id="S7Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack7Bin" id="S7Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack7Totes" id="S7Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s7knockedOver" id="S7KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S7points"> </a>
+                    <a id="S7points"> </a> <br><br>
 					</div>
 					
-                    <div id=stacks>Stack8:<br>
+                    <div id=stacks2>Stack8:<br>
                     <input type="checkbox" name="stack8Litter" id="S8Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack8Bin" id="S8Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack8Totes" id="S8Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s8knockedOver" id="S8KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S8points"> </a>
+                    <a id="S8points"> </a> <br><br>
 					</div>
 					
-                     <div id=stacks>Stack9:<br>
+                     <div id=stacks2>Stack9:<br>
                     <input type="checkbox" name="stack9Litter" id="S9Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack9Bin" id="S9Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack9Totes" id="S9Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s9knockedOver" id="S9KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S9points"> </a>
+                    <a id="S9points"> </a> <br><br>
 					</div>
 					
-                    <div id=stacks> Stack10:<br>
+                    <div id=stacks2> Stack10:<br>
                     <input type="checkbox" name="stack10Litter" id="S10Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack10Bin" id="S10Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack10Totes" id="S10Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s1knockedOver" id="S10KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S10points"> </a>
+                    <a id="S10points"> </a> <br><br>
 					</div>
 				</div>
 					                
@@ -277,93 +280,93 @@
 
                      <h2>Front Scoring Platform:</h2><br>
                     
-                    <div id=stacks>
-                    Stacks: <br><br>
+                    <div id=stacks3>
+                    Stacks: <br>
                     Litter: <br>
                     Bin: <br><br>
                     Totes: <br><br>
                     Knocked Over:<br><br>
                     Points:<br><br>
                     </div>
-                    
-                    <div id=stacks>Stack11<br>
+                      
+                    <div id=stacks2>Stack11<br>
                     <input type="checkbox" name="stack11Litter" id="S11Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack11Bin" id="S11Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack11Totes" id="S11Totes" min="0" max="6" size=8 onchange="update_data();"/><br>
                     <input type="checkbox" name="s11knockedOver" id="S11KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S11points"> </a>
+                    <a id="S11points"> </a> <br><br>
 					</div>
 										
-                    <div id=stacks>Stack12:<br>
+                    <div id=stacks2>Stack12:<br>
                     <input type="checkbox" name="stack12itter" id="S12Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack12Bin" id="S12Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack12Totes" id="S12Totes" min="0" max="6" onchange="update_data();"/><br>
                     <input type="checkbox" name="s12knockedOver" id="S12KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S12points"> </a>
+                    <a id="S12points"> </a> <br><br>
 					</div>
 					
-                     <div id=stacks>Stack13:<br>
+                     <div id=stacks2>Stack13:<br>
                     <input type="checkbox" name="stack13Litter" id="S13Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack13Bin" id="S13Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack13Totes" id="S13Totes" min="0" max="6" onchange="update_data();"/><br>
                     <input type="checkbox" name="s13knockedOver" id="S13KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S13points"> </a>
+                    <a id="S13points"> </a> <br><br>
 					</div>
 					
-                    <div id=stacks>Stack14:<br>
+                    <div id=stacks2>Stack14:<br>
                     <input type="checkbox" name="stack14Litter" id="S14Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack14Bin" id="S14Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack14Totes" id="S14Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s14knockedOver" id="S14KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S14points"> </a>
+                    <a id="S14points"> </a> <br><br>
 					</div>
 					
-                     <div id=stacks>Stack15:<br>
+                     <div id=stacks2>Stack15:<br>
                     <input type="checkbox" name="stack15Litter" id="S15Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack15Bin" id="S15Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack15Totes" id="S15Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s15knockedOver" id="S15KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S15points"> </a>
+                    <a id="S15points"> </a> <br><br>
 					</div>
 					
-                    <div id=stacks> Stack16:<br>
+                    <div id=stacks2> Stack16:<br>
                     <input type="checkbox" name="stack16Litter" id="S16Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack16Bin" id="S16Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack16Totes" id="S16Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s16knockedOver" id="S16KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S16points"> </a>
+                    <a id="S16points"> </a> <br><br>
 					</div>
 					
-                     <div id=stacks>Stack17:<br>
+                     <div id=stacks2>Stack17:<br>
                     <input type="checkbox" name="stack17Litter" id="S17Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack17Bin" id="S17Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack17Totes" id="S17Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s17knockedOver" id="S17KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S17points"> </a>
+                    <a id="S17points"> </a> <br><br>
 					</div>
 					
-                    <div id=stacks>Stack18:<br>
+                    <div id=stacks2>Stack18:<br>
                     <input type="checkbox" name="stack18Litter" id="S18Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack18Bin" id="S18Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack18Totes" id="S18Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s18knockedOver" id="S18KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S18points"> </a>
+                    <a id="S18points"> </a> <br><br>
 					</div>
 					
-                     <div id=stacks>Stack19:<br>
+                     <div id=stacks2>Stack19:<br>
                     <input type="checkbox" name="stack19Litter" id="S19Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack19Bin" id="S19Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack19Totes" id="S19Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s19knockedOver" id="S19KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S19points"> </a>
+                    <a id="S19points"> </a> <br><br>
 					</div>
 					
-                    <div id=stacks>Stack20:<br>
+                    <div id=stacks2>Stack20:<br>
                     <input type="checkbox" name="stack20Litter" id="S20Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack20Bin" id="S20Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack20Totes" id="S20Totes" min="0" max="6"  onchange="update_data();"/><br>
                     <input type="checkbox" name="s2knockedOver" id="S20KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S20points"> </a>
+                    <a id="S20points"> </a> <br><br>
 					</div>
 
 				</div>

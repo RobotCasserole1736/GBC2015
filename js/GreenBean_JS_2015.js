@@ -92,10 +92,12 @@ function stackpoints(totes, bins, litter, knockedover)
     
     // calculate points
     points = totes * 2;  					// 2 points for each tote in this stack on scoring platform  
-    if (bins) 
+    if (totes > 0) 
+    {  if (bins) 
     	{ points = points + (totes * 4); } 	// 4 points per level for bins on scored tote stacks  
-    if (litter)
-    	{ points = points + 6; }			// points for litter in a scored bin
+       if (litter && bins)
+    	{ points = points + 6; }	
+    }		// points for litter in a scored bin
     if (knockedover)
     	{ points = 0; }						// all that work for NOTHING!
     	
