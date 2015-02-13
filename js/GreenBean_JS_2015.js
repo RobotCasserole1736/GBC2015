@@ -146,16 +146,21 @@ function autostacks(bots, totes, stackedtotes, bins, points)
 
 }
 /*
- * Update Scoring Data
+ * Update Data from input elements
  */
 function update_data()
 {
 	   /* autonomous data */
-       /*
-        auto_starting_ball = document.getElementById('starting_ball').checked;
-        auto_floor_ball = document.getElementById('floor_pickup').checked;
-        auto_in_area = document.getElementById('in_area').checked;
-       */
+
+        robotinautozone = document.getElementById('in_area').checked;
+        yellowTotesToAuto = document.getElementById('AutoTotes').value;
+        goodYelStackedTotes = document.getElementById('AutoStacks_succeeded').value;
+        badYelStackedTotes = document.getElementById('AutoStacks_failed').value;
+        goodBinsToAuto = document.getElementById('AutoBins_succeeded').value;
+        badBinsToAuto = document.getElementById('AutoBins_failed').value;
+        StartLocation = document.getElementById('Location').value;
+
+
 
     /* teleop data */
 
@@ -271,7 +276,8 @@ function update_data()
 }
 
 /*
- * Updates the page displays
+ * Calculate any points based on what data was input.
+ * called from update_data().
  */
 function disp_update()
 {
@@ -305,6 +311,15 @@ function disp_update()
    document.getElementById("S18points").innerHTML =  stackpoints(Stack18.totes, Stack18.bins, Stack18.litter, Stack18.knockedover);
    document.getElementById("S19points").innerHTML =  stackpoints(Stack19.totes, Stack19.bins, Stack19.litter, Stack19.knockedover);
    document.getElementById("S20points").innerHTML =  stackpoints(Stack20.totes, Stack20.bins, Stack20.litter, Stack20.knockedover);
+
+	document.getElementById("TotalPoints").innerHTML = document.getElementById('S1points').value + document.getElementById('S2points').value
+		+ document.getElementById('S3points').value + document.getElementById('S4points').value + document.getElementById('S5points').value
+		+ document.getElementById('S6points').value + document.getElementById('S7points').value + document.getElementById('S8points').value
+		+ document.getElementById('S9points').value + document.getElementById('S10points').value + document.getElementById('S11points').value
+		+ document.getElementById('S12points').value + document.getElementById('S13points').value + document.getElementById('S14points').value
+		+ document.getElementById('S15points').value + document.getElementById('S16points').value + document.getElementById('S17points').value
+		+ document.getElementById('S18points').value + document.getElementById('S19points').value + document.getElementById('S20points').value;
+
 
     switch(tele_driving)
     {
@@ -376,19 +391,117 @@ function save_data()
     matchData += document.getElementById("match_number_in").value + ",";
     matchData += document.getElementById("match_type").value + ",";
   // autonomous tab fields
-/*
-	matchData += (document.getElementById("starting_ball").checked ? "T" : "F") + ",";
-    matchData += (document.getElementById("floor_pickup").checked ? "T" : "F") + ",";
-    matchData += (document.getElementById("in_area").checked ? "T" : "F") + ",";
-    matchData += document.getElementById("auto_pts_display").innerHTML + ",";
-    matchData += document.getElementById("auto_miss_display").innerHTML + ",";
-    matchData += document.getElementById("penalty_display1").innerHTML + ",";
-    matchData += document.getElementById("technical_display1").innerHTML + ",";
-    matchData += document.getElementById("Location").value + ",";
-*/
+
+		matchData += robotinautozone + ",";
+		matchData += yellowTotesToAuto + ",";
+		matchData += goodYelStackedTotes + ",";
+		matchData += badYelStackedTotes + ",";
+		matchData += goodBinsToAuto  + ",";
+		matchData += badBinsToAuto + ",";
+		matchData += StartLocation + ",";
+
 
   // teleop tab fields
 
+		matchData += Stack1.totes + ",";
+		matchData += Stack1.bins + ",";
+		matchData += Stack1.litter + ",";
+		matchData += Stack1.knockedover + ",";
+
+		matchData += Stack2.totes + ",";
+		matchData += Stack2.bins + ",";
+		matchData += Stack2.litter + ",";
+		matchData += Stack2.knockedover + ",";
+
+		matchData += Stack3.totes + ",";
+		matchData += Stack3.bins + ",";
+		matchData += Stack3.litter + ",";
+		matchData += Stack3.knockedover + ",";
+
+		matchData += Stack4.totes + ",";
+		matchData += Stack4.bins + ",";
+		matchData += Stack4.litter + ",";
+		matchData += Stack4.knockedover + ",";
+
+		matchData += Stack5.totes + ",";
+		matchData += Stack5.bins + ",";
+		matchData += Stack5.litter + ",";
+		matchData += Stack5.knockedover + ",";
+
+		matchData += Stack6.totes + ",";
+		matchData += Stack6.bins + ",";
+		matchData += Stack6.litter + ",";
+		matchData += Stack6.knockedover + ",";
+
+		matchData += Stack7.totes + ",";
+		matchData += Stack7.bins + ",";
+		matchData += Stack7.litter + ",";
+		matchData += Stack7.knockedover + ",";
+
+		matchData += Stack8.totes + ",";
+		matchData += Stack8.bins + ",";
+		matchData += Stack8.litter + ",";
+		matchData += Stack8.knockedover + ",";
+
+		matchData += Stack9.totes + ",";
+		matchData += Stack9.bins + ",";
+		matchData += Stack9.litter + ",";
+		matchData += Stack9.knockedover + ",";
+
+		matchData += Stack10.totes + ",";
+		matchData += Stack10.bins + ",";
+		matchData += Stack10.litter + ",";
+		matchData += Stack10.knockedover + ",";
+
+		matchData += Stack11.totes + ",";
+		matchData += Stack11.bins + ",";
+		matchData += Stack11.litter + ",";
+		matchData += Stack11.knockedover + ",";
+
+		matchData += Stack12.totes + ",";
+		matchData += Stack12.bins + ",";
+		matchData += Stack12.litter + ",";
+		matchData += Stack12.knockedover + ",";
+
+		matchData += Stack13.totes + ",";
+		matchData += Stack13.bins + ",";
+		matchData += Stack13.litter + ",";
+		matchData += Stack13.knockedover + ",";
+
+		matchData += Stack14.totes + ",";
+		matchData += Stack14.bins + ",";
+		matchData += Stack14.litter + ",";
+		matchData += Stack14.knockedover + ",";
+
+		matchData += Stack15.totes + ",";
+		matchData += Stack15.bins + ",";
+		matchData += Stack15.litter + ",";
+		matchData += Stack15.knockedover + ",";
+
+		matchData += Stack16.totes + ",";
+		matchData += Stack16.bins + ",";
+		matchData += Stack16.litter + ",";
+		matchData += Stack16.knockedover + ",";
+
+		matchData += Stack17.totes + ",";
+		matchData += Stack17.bins + ",";
+		matchData += Stack17.litter + ",";
+		matchData += Stack17.knockedover + ",";
+
+		matchData += Stack18.totes + ",";
+		matchData += Stack18.bins + ",";
+		matchData += Stack18.litter + ",";
+		matchData += Stack18.knockedover + ",";
+
+		matchData += Stack19.totes + ",";
+		matchData += Stack19.bins + ",";
+		matchData += Stack19.litter + ",";
+		matchData += Stack19.knockedover + ",";
+
+		matchData += Stack20.totes + ",";
+		matchData += Stack20.bins + ",";
+		matchData += Stack20.litter + ",";
+		matchData += Stack20.knockedover + ",";
 
 /*
     matchData += (human_tote_loader) ? "T" : "F") + ",";
@@ -401,14 +514,9 @@ function save_data()
         human_litter_thrower = document.getElementById('Human_throwsLitter').checked;
 
         tele_driving = document.getElementById('driving_ability').value;
+*/
 
-		Stack1.totes = document.getElementById('S1Totes').value;
-		Stack1.bins = document.getElementById('S1Bin').checked;
-		Stack1.litter = document.getElementById('S1Litter').checked;
-		Stack1.knockedover = document.getElementById('S1KnockedOver').checked;
-
-
-
+/*
     matchData += document.getElementById("robot_block").value + ",";
     matchData += document.getElementById("robot_block_time").value + ",";
     matchData += tele_attempts_made[0] + ",";
@@ -461,7 +569,7 @@ function save_data()
     sharedData += (document.getElementById("deadball").checked ? "T" : "F") + ",";
     sharedData += (document.getElementById("brokedown").checked ? "T" : "F") + "\n";
 
-
+*/
     var comments = document.getElementById("Comments").value;
     comments = comments.replace(",","_"); //Get rid of commas so we don't mess up CSV
     comments = comments.replace(/(\r\n|\n|\r)/gm,"  ");  // get rid of any newline characters
@@ -472,14 +580,14 @@ function save_data()
     else
         localStorage.setItem("MatchData",existingData + matchData);
     document.getElementById("HistoryCSV").value = localStorage.getItem("MatchData");
-*/
+/*
     var existingSharedData = localStorage.getItem("SharedData");
     if(existingSharedData == null)
         localStorage.setItem("SharedData",sharedData);
     else
         localStorage.setItem("SharedData",existingSharedData + sharedData);
     document.getElementById("SharedDataCSV").value = localStorage.getItem("SharedData");
-
+*/
 
 
 }
