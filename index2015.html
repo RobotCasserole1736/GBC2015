@@ -119,26 +119,22 @@
             <!-- Need to add starting location selector here -->
             <div id=stacks>
               <div id="AutonomousScoring">
-                Robot to Auto Zone: <input type="checkbox" name="in_area" id="in_area"> <br><br>
-               	Yellow Totes to Auto Zone:	<input type="number" name="AutoTotes" id="AutoTotes" min=0 max =3 size=8/><br>
+                Robot to Auto Zone: <input type="checkbox" name="in_area" id="in_area" onchange="update_data();"> <br><br>
+               	Yellow Totes to Auto Zone:	<input type="number" name="AutoTotes" id="AutoTotes" min=0 max =3 size=8 onchange="update_data();" /><br>
 				Succeeded | Failed  <br>
                 Yellow Totes stacked:
-                	<input type="number" name="AutoStacks_succeeded" id="AutoStacks_succeeded" min=0 max =3 size=8/>
-                	<input type="number" name="AutoStacks_failed" id="AutoStacks_failed" min=0 max =3 size=8/><br>
+                	<input type="number" name="AutoStacks_succeeded" id="AutoStacks_succeeded" min=0 max =3 size=8 onchange="update_data();" />
+                	<input type="number" name="AutoStacks_failed" id="AutoStacks_failed" min=0 max =3 size=8 onchange="update_data();" /><br>
                 Bins to Auto Zone:
-                	<input type="number" name="AutoBins_succeeded" id="AutoBins_succeeded" min=0 max=3 size=8/>
-                	<input type="number" name="AutoBins_failed" id="AutoBins_failed" min=0 max=3 size=8/><br>
-                <br>
-                Points Scored: <a id="auto_pts_display">0</a>
-                <br>
-                Points Missed: <a id="auto_miss_display">0</a>
-                <br><br><br><br><br><br><br><br><br><br><br> <br><br>
+                	<input type="number" name="AutoBins_succeeded" id="AutoBins_succeeded" min=0 max=3 size=8 onchange="update_data();" />
+                	<input type="number" name="AutoBins_failed" id="AutoBins_failed" min=0 max=3 size=8 onchange="update_data();" /><br>
+                <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br>
               </div>
             </div>
             <div id=stacks>
              <div id="StartLocation">
                 Starting Location :
-                 <select name="Location" id="Location">
+                 <select name="Location" id="Location" onchange="update_data();">
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option>
@@ -146,15 +142,6 @@
                  </select> <br>
                 <img src="img/Clip_FRC_Field_2015.jpg" height="450" width="350">
               </div>
-             </div>
-             <div id=stacks>
-                <button onclick="Penalty('penalty');">Penalty</button>
-                <button onclick="Penalty('technical');">Technical Foul</button>
-                <br>
-                <a>Penalties :  </a><a id="penalty_display1">0</a>
-                <br>
-                <a>Technical Fouls :  </a><a id="technical_display1">0</a>
-                <br><br><br><br><br><br><br><br><br>
              </div>
         </div>
 
@@ -186,7 +173,7 @@
                     </div>
 
             	</form>
-                   Total Points:<a id="TotalPoints"> </a> <br>
+                   Total Points:<a id="TotalPoints"> </a> <br><br>
 
             </div>
 
@@ -301,7 +288,9 @@
                		<input type="checkbox" name="stack11Bin" id="S11Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack11Totes" id="S11Totes" min="0" max="6" size=8 onchange="update_data();"/><br>
                     <input type="checkbox" name="s11knockedOver" id="S11KnockedOver" onchange="update_data();"/><br><br>
-                    <a id="S11points"> </a> <br><br>
+                     <input type="checkbox" name="s11knockedOver" id="S11KnockedOver" onchange="update_data();"/><br><br>
+                    <input type="checkbox" name="s11knockedOver" id="S11KnockedOver" onchange="update_data();"/><br><br>
+                   <a id="S11points"> </a> <br><br>
 					</div>
 
                     <div id=stacks2>Stack12:<br>
