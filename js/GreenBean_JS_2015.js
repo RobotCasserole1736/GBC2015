@@ -51,7 +51,7 @@ window.onload=function(){Update_Stuff(); Hide_Tabs();};
     	Stack18 = new stacks(0,0,0,0);
     	Stack19 = new stacks(0,0,0,0);
     	Stack20 = new stacks(0,0,0,0);
-
+//:)
     var human_tote_loader = 0;						// did they have a human player loading totes?
     var human_litter_loader = 0;					// did they have a human player loading litter from slot?
     var human_litter_thrower = 0;    				// did they have a human player throwing litter across the field?
