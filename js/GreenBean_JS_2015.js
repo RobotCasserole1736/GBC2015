@@ -105,6 +105,20 @@ function stackpoints(totes, bins, litter, knockedover)
     return points;
 }
 
+function person(firstname, lastname, age, eyecolor)
+{
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.age = age;
+    this.eyecolor = eyecolor;
+
+    this.changeName = function (name) {
+        this.lastname = name;
+    }
+}
+
+
+
 /* constructor for autostack objects
  *
  *   stacks function calculates points for stacks on scoring platforms
@@ -154,22 +168,30 @@ function update_data()
 
         robotinautozone = document.getElementById('in_area').checked;
         yellowTotesToAuto = document.getElementById('AutoTotes').value;
+
         goodYelStackedTotes = document.getElementById('AutoStacks_succeeded').value;
         badYelStackedTotes = document.getElementById('AutoStacks_failed').value;
+
         goodBinsToAuto = document.getElementById('AutoBins_succeeded').value;
         badBinsToAuto = document.getElementById('AutoBins_failed').value;
+
+        goodBinsToAuto = document.getElementById('AutoBins_succeeded').value;
+        badBinsToAuto = document.getElementById('AutoBins_failed').value;
+
         StartLocation = document.getElementById('Location').value;
 
 
 
     /* teleop data */
 
-        human_tote_loader = document.getElementById('Human_feedsTotes').checked;
-        human_litter_loader = document.getElementById('Human_feedsLitter').checked;
-        human_litter_thrower = document.getElementById('Human_throwsLitter').checked;
+        humanfeedslitter = document.getElementById('human_feedsLitter').checked;
+        humanthrowslitter = document.getElementById('human_throwsLitter').checked;
 
-        tele_driving = document.getElementById('driving_ability').value;
-        bin_feeding = document.getElementById('Tote_Feed_Speed').value;
+        humanfeedstotes = document.getElementById('human_feedsTotes').value;
+        driverability = document.getElementById('driving_ability').value;
+        totefeedspeed = document.getElementById('ToteFeedSpeed').value;
+
+		// stacks data
 
 		Stack1.totes = document.getElementById('S1Totes').value;
 		Stack1.bins = document.getElementById('S1Bin').checked;
@@ -593,10 +615,34 @@ function save_pit_data()
 //This only resets stuff Nick felt should be reset
 function reset_form()
 {
-   //document.getElementById("match_type").value = "Qualification";
-	/*
+// match data reset
     document.getElementById("team_number_in").value = "";
     document.getElementById("match_number_in").value = parseInt(document.getElementById("match_number_in").value) + 1;
+
+
+
+    document.getElementById("Location").value = "A";
+
+// autonomous data reset
+
+
+// teleop data reset
+
+
+
+// pit data reset
+    document.getElementById("drive_type").value = "";
+    document.getElementById("drive_speed").value = "";
+    document.getElementById("number_wheels").value = "";
+
+
+
+	/*
+
+leftovers from last year - kept temporarily for reference...
+
+
+
     document.getElementById("starting_ball").value = 0;
     document.getElementById("floor_pickup").value = 0;
 
@@ -605,43 +651,17 @@ function reset_form()
 
     document.getElementById("starting_ball").checked = false;
     document.getElementById("floor_pickup").checked = false;
-    document.getElementById("in_area").checked = false;
-    document.getElementById("Location").value = "A";
-    auto_goals[0] = new goal_t(0,0,0,0,0);
-    auto_goals[1] = new goal_t(0,0,0,0,0);
 
     tele_score_stack = new Array();
     document.getElementById("Front_shoot").checked = false;
-    document.getElementById("Full_shoot").checked = false;
-    document.getElementById("Human_load").checked = false;
-    document.getElementById("Floor_load").checked = false;
     tele_goals[0] = new goal_t(0,0,0,0,0);
     tele_goals[1] = new goal_t(0,0,0,0,0);
-    tele_attempts_made = [0,0,0];
-	tele_attempts_miss = [0,0,0];
-    tele_front_court = 0;
-    tele_full_court = 0;
-    tele_human_loading = 0;
-    tele_driving = 0;
-    tele_robot_block_time = 0;
-    document.getElementById("driving_ability").value = 0;
-    document.getElementById("robot_block").value = 0;
-    document.getElementById("robot_block_time").value = 0;
-    document.getElementById("pos_Inbounder").checked = false;
-    document.getElementById("Pos_MidCourt").checked = false;
-    document.getElementById("Pos_Shooter").checked = false;
-    document.getElementById('Overall_Rating').value = 0;
-    document.getElementById("deadball").checked = false;
-    document.getElementById("brokedown").checked = false;
 
     penalty_stack = new Array();
     penalty = 0;
     technical = 0;
     document.getElementById("Comments").value="";
 
-    document.getElementById("drive_type").value = "";
-    document.getElementById("drive_speed").value = "";
-    document.getElementById("number_wheels").value = "";
     document.getElementById("low_pass").checked = false;
     document.getElementById("high_pass").checked = false;
     document.getElementById("high_goal").checked = false;
