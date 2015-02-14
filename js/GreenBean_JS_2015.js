@@ -403,6 +403,19 @@ function save_data()
 
   // teleop tab fields
 
+  /*
+    matchData += (human_tote_loader) ? "T" : "F") + ",";
+    matchData += (human_litter_loader) ? "T" : "F") + ",";
+    matchData += (human_litter_thrower) ? "T" : "F") + ",";
+    matchData += document.getElementById("driving_ability").value + ",";
+
+        human_tote_loader = document.getElementById('Human_feedsTotes').checked;
+        human_litter_loader = document.getElementById('Human_feedsLitter').checked;
+        human_litter_thrower = document.getElementById('Human_throwsLitter').checked;
+
+        tele_driving = document.getElementById('driving_ability').value;
+*/
+
 		matchData += Stack1.totes + ",";
 		matchData += Stack1.bins + ",";
 		matchData += Stack1.litter + ",";
@@ -503,73 +516,9 @@ function save_data()
 		matchData += Stack20.litter + ",";
 		matchData += Stack20.knockedover + ",";
 
-/*
-    matchData += (human_tote_loader) ? "T" : "F") + ",";
-    matchData += (human_litter_loader) ? "T" : "F") + ",";
-    matchData += (human_litter_thrower) ? "T" : "F") + ",";
-    matchData += document.getElementById("driving_ability").value + ",";
 
-        human_tote_loader = document.getElementById('Human_feedsTotes').checked;
-        human_litter_loader = document.getElementById('Human_feedsLitter').checked;
-        human_litter_thrower = document.getElementById('Human_throwsLitter').checked;
 
-        tele_driving = document.getElementById('driving_ability').value;
-*/
 
-/*
-    matchData += document.getElementById("robot_block").value + ",";
-    matchData += document.getElementById("robot_block_time").value + ",";
-    matchData += tele_attempts_made[0] + ",";
-    matchData += tele_attempts_miss[0] + ",";
-    matchData += tele_attempts_made[1] + ",";
-    matchData += tele_attempts_miss[1] + ",";
-    matchData += tele_attempts_made[2] + ",";
-    matchData += tele_attempts_miss[2] + ",";
-    matchData += (document.getElementById("human_feedsTotes").checked ? "T" : "F") + ",";
-    matchData += (document.getElementById("human_feedsLitter").checked ? "T" : "F") + ",";
-    matchData += (document.getElementById("human_throwsLitter").checked ? "T" : "F") + ",";
-    matchData += (document.getElementById("deadball").checked ? "T" : "F") + ",";
-    matchData += (document.getElementById("brokedown").checked ? "T" : "F") + ",";
-    matchData += document.getElementById("Overall_Rating").value + ",";
-
-    var sharedData = document.getElementById("scout_name_in").value + ",";
-    sharedData += document.getElementById("team_number_in").value + ",";
-    sharedData += document.getElementById("match_number_in").value + ",";
-    sharedData += document.getElementById("match_type").value + ",";
-  // autonomous tab fields
-    sharedData += (document.getElementById("starting_ball").checked ? "T" : "F") + ",";
-    sharedData += (document.getElementById("floor_pickup").checked ? "T" : "F") + ",";
-    sharedData += (document.getElementById("in_area").checked ? "T" : "F") + ",";
-    sharedData += document.getElementById("auto_pts_display").innerHTML + ",";
-    sharedData += document.getElementById("auto_miss_display").innerHTML + ",";
-    sharedData += document.getElementById("penalty_display1").innerHTML + ",";
-    sharedData += document.getElementById("technical_display1").innerHTML + ",";
-    sharedData += document.getElementById("Location").value + ",";
-  // teleop tab fields
-    sharedData += (document.getElementById("Front_shoot").checked ? "T" : "F") + ",";
-    sharedData += (document.getElementById("Full_shoot").checked ? "T" : "F") + ",";
-    sharedData += (document.getElementById("Human_load").checked ? "T" : "F") + ",";
-    sharedData += (document.getElementById("Floor_load").checked ? "T" : "F") + ",";
-    sharedData += document.getElementById("tele_pts_display").innerHTML + ",";
-    sharedData += document.getElementById("tele_miss_display").innerHTML + ",";
-    sharedData += document.getElementById("penalty_display2").innerHTML + ",";
-    sharedData += document.getElementById("technical_display2").innerHTML + ",";
-    sharedData += document.getElementById("driving_ability").value + ",";
-    sharedData += document.getElementById("robot_block").value + ",";
-    sharedData += document.getElementById("robot_block_time").value + ",";
-    sharedData += tele_attempts_made[0] + ",";
-    sharedData += tele_attempts_miss[0] + ",";
-    sharedData += tele_attempts_made[1] + ",";
-    sharedData += tele_attempts_miss[1] + ",";
-    sharedData += tele_attempts_made[2] + ",";
-    sharedData += tele_attempts_miss[2] + ",";
-    sharedData += (document.getElementById("pos_Inbounder").checked ? "T" : "F") + ",";
-    sharedData += (document.getElementById("Pos_MidCourt").checked ? "T" : "F") + ",";
-    sharedData += (document.getElementById("Pos_Shooter").checked ? "T" : "F") + ",";
-    sharedData += (document.getElementById("deadball").checked ? "T" : "F") + ",";
-    sharedData += (document.getElementById("brokedown").checked ? "T" : "F") + "\n";
-
-*/
     var comments = document.getElementById("Comments").value;
     comments = comments.replace(",","_"); //Get rid of commas so we don't mess up CSV
     comments = comments.replace(/(\r\n|\n|\r)/gm,"  ");  // get rid of any newline characters
