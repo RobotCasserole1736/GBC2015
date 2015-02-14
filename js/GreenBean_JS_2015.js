@@ -85,27 +85,27 @@ function stack(totes, bins, litter, knockedover)
     this.litter = litter;										// litter in a stacked bin
     this.knockedover = knockedover; 
   																// sadly no points if this is true...
-  	this.stackpoints = function(totes, bins, litter, knockedover)
+  	this.stackpoints = function()
   	{
     	var points = 0;
 
     	// calculate points for stacks during telop
-    	points = totes * 2;  					// 2 points for each tote in this stack on scoring platform
-	    if (totes > 0)
+    	points = this.totes * 2;  					// 2 points for each tote in this stack on scoring platform
+	    if (this.totes > 0)
 	    {  
-	    	if (bins)
+	    	if (this.bins)
 	    	{
 	    		// 4 points per level for bins on scored tote stacks 
-	    		points = points + (totes * 4); 
+	    		points = points + (this.totes * 4); 
 	    	}
 	    	
-	        if (litter && bins)
+	        if (this.litter && this.bins)
 	    	{ 
 	    		// points for litter in a scored bin
 	    		points = points + 6; 
 	    	}
 	    	
-	    	if (knockedover)
+	    	if (this.knockedover)
 	    	{ 
 	    		points = 0; 
 	    	}						// all that work for NOTHING!
