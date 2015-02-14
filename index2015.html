@@ -20,7 +20,6 @@
 
         <script type="text/javascript" src="./js/GreenBean_JS_2015.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="./libgif.js"></script>
 
     </head>
     <body>
@@ -185,7 +184,9 @@
                       Litter: <br>
                       Bin: <br><br>
                       Totes: <br><br>
-                      Knocked Over:<br><br>
+                      Stacked:<br>
+                      Scored:<br>
+                      Knocked Over:<br>
                       Points:<br><br>
                     </div>
 
@@ -193,7 +194,13 @@
                     <input type="checkbox" name="stack1Litter" id="S1Litter" onchange="update_data();"/><br>
                		<input type="checkbox" name="stack1Bin" id="S1Bin" onchange="update_data();"/><br>
                		<input type="number" name="stack1Totes" id="S1Totes" min="0" max="6" size=8 onchange="update_data();"/><br>
-                    <input type="checkbox" name="s1knockedOver" id="S1KnockedOver" onchange="update_data();"/><br><br>
+                    <form id="stackinfo">
+						<input type="radio" name="stacked" id="S1stacked" value="Stacked" checked><br>
+
+						<input type="radio" name="scored" value="S1scored"><br>
+
+						<input type="radio" name="knockedover" value="S1KnockedOver">
+						</form>
                     <a id="S1points"> </a> <br><br>
 					</div>
 

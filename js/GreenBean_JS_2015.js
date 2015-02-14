@@ -11,7 +11,7 @@
 
 
 
-window.onload=function(){Update_Stuff(); Hide_Tabs();};
+window.onload=function(){update_data(); Hide_Tabs();};
 
 
 /* global variables */
@@ -34,22 +34,22 @@ window.onload=function(){Update_Stuff(); Hide_Tabs();};
     var Stack1 = new stacks(0,0,0,0),
     	Stack2 = new stacks(0,0,0,0),
     	Stack3 = new stacks(0,0,0,0),
-    	Stack4 = new stacks(0,0,0,0);
-    	Stack5 = new stacks(0,0,0,0);
-    	Stack6 = new stacks(0,0,0,0);
-    	Stack7 = new stacks(0,0,0,0);
-    	Stack8 = new stacks(0,0,0,0);
-    	Stack9 = new stacks(0,0,0,0);
-    	Stack10 = new stacks(0,0,0,0);
+    	Stack4 = new stacks(0,0,0,0),
+    	Stack5 = new stacks(0,0,0,0),
+    	Stack6 = new stacks(0,0,0,0),
+    	Stack7 = new stacks(0,0,0,0),
+    	Stack8 = new stacks(0,0,0,0),
+    	Stack9 = new stacks(0,0,0,0),
+    	Stack10 = new stacks(0,0,0,0),
         Stack11 = new stacks(0,0,0,0),
     	Stack12 = new stacks(0,0,0,0),
     	Stack13 = new stacks(0,0,0,0),
-    	Stack14 = new stacks(0,0,0,0);
-    	Stack15 = new stacks(0,0,0,0);
-    	Stack16 = new stacks(0,0,0,0);
-    	Stack17 = new stacks(0,0,0,0);
-    	Stack18 = new stacks(0,0,0,0);
-    	Stack19 = new stacks(0,0,0,0);
+    	Stack14 = new stacks(0,0,0,0),
+    	Stack15 = new stacks(0,0,0,0),
+    	Stack16 = new stacks(0,0,0,0),
+    	Stack17 = new stacks(0,0,0,0),
+    	Stack18 = new stacks(0,0,0,0),
+    	Stack19 = new stacks(0,0,0,0),
     	Stack20 = new stacks(0,0,0,0);
 //:)
     var human_tote_loader = 0;						// did they have a human player loading totes?
@@ -77,45 +77,43 @@ window.onload=function(){Update_Stuff(); Hide_Tabs();};
  *   points (output?) - calculated points for this stack
  *
  * */
-function stack(totes, bins, litter, knockedover)
+function stacks(totes, bins, litter, knockedover)
 {
 	// constructor for stacks objects
 	this.totes= totes;											// stacks start with totes.
     this.bins = bins;											// bins on tote stacks
     this.litter = litter;										// litter in a stacked bin
-    this.knockedover = knockedover; 
+    this.knockedover = knockedover;
   																// sadly no points if this is true...
-  	this.stackpoints = function()
-  	{
+  	this.stackpoints = function()  	{
     	var points = 0;
 
     	// calculate points for stacks during telop
     	points = this.totes * 2;  					// 2 points for each tote in this stack on scoring platform
 	    if (this.totes > 0)
-	    {  
-	    	if (this.bins)
-	    	{
-	    		// 4 points per level for bins on scored tote stacks 
-	    		points = points + (this.totes * 4); 
+	    {
+	    	if (this.bins) 	{
+	    		// 4 points per level for bins on scored tote stacks
+	    		points = points + (this.totes * 4);
 	    	}
-	    	
-	        if (this.litter && this.bins)
-	    	{ 
+
+	        if (this.litter && this.bins)  	{
 	    		// points for litter in a scored bin
-	    		points = points + 6; 
+	    		points = points + 6;
 	    	}
-	    	
-	    	if (this.knockedover)
-	    	{ 
-	    		points = 0; 
+
+	    	if (this.knockedover)  	{
+	    		points = 0;
 	    	}						// all that work for NOTHING!
-	
+
 			return points;
-		}
+		 }
+
+}
 }
 
-/* constr																	
-  									
+/* constr
+
 }
 
 function stackpoints(totes, bins, litter, knockedover)
@@ -137,17 +135,7 @@ function stackpoints(totes, bins, litter, knockedover)
     return points;
 }
 
-function person(firstname, lastname, age, eyecolor)
-{
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.age = age;
-    this.eyecolor = eyecolor;
 
-    this.changeName = function (name) {
-        this.lastname = name;
-    }
-}
 
 
 
@@ -207,22 +195,19 @@ function update_data()
         goodBinsToAuto = document.getElementById('AutoBins_succeeded').value;
         badBinsToAuto = document.getElementById('AutoBins_failed').value;
 
-        goodBinsToAuto = document.getElementById('AutoBins_succeeded').value;
-        badBinsToAuto = document.getElementById('AutoBins_failed').value;
-
         StartLocation = document.getElementById('Location').value;
 
 
 
     /* teleop data */
-
+/*
         humanfeedslitter = document.getElementById('human_feedsLitter').checked;
         humanthrowslitter = document.getElementById('human_throwsLitter').checked;
 
         humanfeedstotes = document.getElementById('human_feedsTotes').value;
         driverability = document.getElementById('driving_ability').value;
         totefeedspeed = document.getElementById('ToteFeedSpeed').value;
-
+*/
 		// stacks data
 
 		Stack1.totes = document.getElementById('S1Totes').value;
@@ -344,7 +329,7 @@ function disp_update()
 
     /* teleop */
 
-   document.getElementById("S1points").innerHTML =  stackpoints(Stack1.totes, Stack1.bins, Stack1.litter, Stack1.knockedover);
+   document.getElementById("S1points").innerHTML =  Stack1.stackpoints;  //stackpoints(Stack1.totes, Stack1.bins, Stack1.litter, Stack1.knockedover);
    document.getElementById("S2points").innerHTML =  stackpoints(Stack2.totes, Stack2.bins, Stack2.litter, Stack2.knockedover);
    document.getElementById("S3points").innerHTML =  stackpoints(Stack3.totes, Stack3.bins, Stack3.litter, Stack3.knockedover);
    document.getElementById("S4points").innerHTML =  stackpoints(Stack4.totes, Stack4.bins, Stack4.litter, Stack4.knockedover);
@@ -445,7 +430,7 @@ function save_data()
     matchData += document.getElementById("match_number_in").value + ",";
     matchData += document.getElementById("match_type").value + ",";
   // autonomous tab fields
-
+/*
 		matchData += robotinautozone + ",";
 		matchData += yellowTotesToAuto + ",";
 		matchData += goodYelStackedTotes + ",";
@@ -453,7 +438,7 @@ function save_data()
 		matchData += goodBinsToAuto  + ",";
 		matchData += badBinsToAuto + ",";
 		matchData += StartLocation + ",";
-
+*/
 
   // teleop tab fields
 
@@ -648,6 +633,7 @@ function save_pit_data()
 function reset_form()
 {
 // match data reset
+/*
     document.getElementById("team_number_in").value = "";
     document.getElementById("match_number_in").value = parseInt(document.getElementById("match_number_in").value) + 1;
 
@@ -666,7 +652,7 @@ function reset_form()
     document.getElementById("drive_type").value = "";
     document.getElementById("drive_speed").value = "";
     document.getElementById("number_wheels").value = "";
-
+*/
 
 
 	/*
