@@ -9,10 +9,7 @@
  *
  ******************************************************************************/
 
-
-
 window.onload=function() { Hide_Tabs(); update_data();};
-
 
 /* global variables */
 
@@ -36,7 +33,6 @@ window.onload=function() { Hide_Tabs(); update_data();};
 	for (var i = 1; i < 22; i++){
     	Stack.push( new stacks(0,0,0,0) );
     }
-
 
 //:)
     var human_tote_loader = 0;						// did they have a human player loading totes?
@@ -94,16 +90,13 @@ function stacks(totes, bins, litter, knockedover)
 		return points;
 	};
 
-	this.stackdata = function(){
-		var csvdata = "";
-
-		csvData += this.totes + ",";
-		csvData += this.bins + ",";
-		csvData += this.litter + ",";
-		csvData += this.knockedover + ",";
-
-		return csvData;
-
+	this.csvData = function(){
+		var csv_Data = "";
+		csv_Data += this.totes + ",";
+		csv_Data += this.bins + ",";
+		csv_Data += this.litter + ",";
+		csv_Data += this.knockedover + ",";
+		return csv_Data;
 	};
 }
 
