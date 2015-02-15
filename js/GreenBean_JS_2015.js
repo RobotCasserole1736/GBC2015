@@ -188,14 +188,14 @@ function update_data()
 
 
     /* teleop data */
-/*
+
         humanfeedslitter = document.getElementById('human_feedsLitter').checked;
         humanthrowslitter = document.getElementById('human_throwsLitter').checked;
 
         humanfeedstotes = document.getElementById('human_feedsTotes').value;
         driverability = document.getElementById('driving_ability').value;
-        totefeedspeed = document.getElementById('ToteFeedSpeed').value;
-*/
+        bin_feeding = document.getElementById('Tote_Feed_Speed').value;
+
 		// stacks data
 
 	for (var i = 1; i < 20; i++){
@@ -243,7 +243,7 @@ function disp_update()
 
 	document.getElementById("TotalPoints").innerHTML = totpoints;
 
-    switch(tele_driving)
+    switch(driverability)
     {
         case '0':
             document.getElementById("tele_driving_display").innerHTML = "Little or No Movement";
