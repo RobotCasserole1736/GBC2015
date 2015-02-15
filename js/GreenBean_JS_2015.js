@@ -337,13 +337,11 @@ function save_data()
 
         tele_driving = document.getElementById('driving_ability').value;
 */
+	for (var i = 1; i < 21; i++){
 
-		matchData += Stack1.csvData() + Stack2.csvData() + Stack3.csvData() + Stack4.csvData() + Stack5.csvData();
-		matchData += Stack6.csvData() + Stack7.csvData() + Stack8.csvData() + Stack9.csvData() + Stack10.csvData();
-		matchData += Stack11.csvData() + Stack12.csvData() + Stack13.csvData() + Stack14.csvData() + Stack15.csvData();
-		matchData += Stack16.csvData() + Stack17.csvData() + Stack18.csvData() + Stack19.csvData() + Stack20.csvData();
+		matchData += Stack[i].csvData();
 
-
+}
 
     var comments = document.getElementById("Comments").value;
     comments = comments.replace(",","_"); //Get rid of commas so we don't mess up CSV

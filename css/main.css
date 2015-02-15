@@ -21,7 +21,9 @@ textarea {
 body {
     font-size: 1em;
     line-height: 1.4;
+    width: 1024px;
 }
+
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -96,12 +98,9 @@ textarea {
     break-before: page
 }
 
-#TeleopMade, #TeleopMissed {
-    margin-top: 15px;
-}
 
 h1 {
-    margin-top: 0.2em;
+    margin-top: 0.1em;
     margin-bottom: 0.2em;
 }
 h2 {
@@ -387,6 +386,27 @@ li {
     margin-right: float;
     text-align: center;
 }
+.div1 {
+    display: inline-block;
+    width: 150px;
+    margin-left: 8px;
+    margin-right: float;
+    text-align: right;
+}
+.div2 {
+    display: inline-block;
+    width: 475px;
+    margin-left: 8px;
+    margin-right: float;
+    text-align: left;
+
+}.div3 {
+    display: inline-block;
+    width: 325px;
+    margin-left: 8px;
+    margin-right: float;
+    text-align: left;
+}
 
 #Stack1, #Stack2, #Stack3, #Stack4, #Stack5, #Stack6, #Stack7, #Stack8, #Stack9, #Stack10,
 #Stack11, #Stack12, #Stack13, #Stack14, #Stack15, #Stack16, #Stack17, #Stack18, #Stack19, #Stack20
@@ -397,7 +417,7 @@ li {
     margin-right: auto;
 }
 
-.stacks3, .LandFill {
+.stacks3 {
     display: inline-block;
     margin="20px"
     text-align: right;
@@ -405,9 +425,8 @@ li {
 
 .headerDivider {
     display: inline-block;
-    margin="20px"
-    margin-left: 40px;
-    text-align: right;
+    margin="10px"
+    margin-left: 20px;
     border-left:2px solid #38546d;
     border-right:2px solid #16222c;
     height:180px;
