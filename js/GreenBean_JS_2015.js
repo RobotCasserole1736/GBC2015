@@ -11,7 +11,7 @@
 
 
 
-window.onload=function(){update_data(); Hide_Tabs();};
+window.onload=function() { Hide_Tabs(); update_data();};
 
 
 /* global variables */
@@ -23,7 +23,7 @@ window.onload=function(){update_data(); Hide_Tabs();};
     var penalty_stack = new Array();
 
 /* autonomous */
-    var auto_sets = new autostacks(0,0,0,0,0,0);  	// auto-sets - robot sets, tote sets, stacked sets, bin sets
+    //var auto_sets = new autostacks(0,0,0,0,0,0);  	// auto-sets - robot sets, tote sets, stacked sets, bin sets
 
     var auto_in_area = 0;						  	// true if this robot was in the auto zone by end of autonomous
     var auto_totes = 0; 							// # yellow totes this bot got into auto zone in autonomous
@@ -31,26 +31,13 @@ window.onload=function(){update_data(); Hide_Tabs();};
     var auto_bins = 0;								// # bins this bot got into auto zone in autonomous
 
 /* teleoperated */
-    var Stack1 = new stacks(0,0,0,0),
-    	Stack2 = new stacks(0,0,0,0),
-    	Stack3 = new stacks(0,0,0,0),
-    	Stack4 = new stacks(0,0,0,0),
-    	Stack5 = new stacks(0,0,0,0),
-    	Stack6 = new stacks(0,0,0,0),
-    	Stack7 = new stacks(0,0,0,0),
-    	Stack8 = new stacks(0,0,0,0),
-    	Stack9 = new stacks(0,0,0,0),
-    	Stack10 = new stacks(0,0,0,0),
-        Stack11 = new stacks(0,0,0,0),
-    	Stack12 = new stacks(0,0,0,0),
-    	Stack13 = new stacks(0,0,0,0),
-    	Stack14 = new stacks(0,0,0,0),
-    	Stack15 = new stacks(0,0,0,0),
-    	Stack16 = new stacks(0,0,0,0),
-    	Stack17 = new stacks(0,0,0,0),
-    	Stack18 = new stacks(0,0,0,0),
-    	Stack19 = new stacks(0,0,0,0),
-    	Stack20 = new stacks(0,0,0,0);
+
+	var Stack = [];
+	for (var i = 1; i < 22; i++){
+    	Stack.push( new stacks(0,0,0,0) );
+    }
+
+
 //:)
     var human_tote_loader = 0;						// did they have a human player loading totes?
     var human_litter_loader = 0;					// did they have a human player loading litter from slot?
@@ -85,31 +72,39 @@ function stacks(totes, bins, litter, knockedover)
     this.litter = litter;										// litter in a stacked bin
     this.knockedover = knockedover;
   																// sadly no points if this is true...
-  	this.stackpoints = function()  	{
+  	this.stackpoints = function()
+  	{
     	var points = 0;
 
     	// calculate points for stacks during telop
-    	points = this.totes * 2;  					// 2 points for each tote in this stack on scoring platform
-	    if (this.totes > 0)
-	    {
-	    	if (this.bins) 	{
-	    		// 4 points per level for bins on scored tote stacks
-	    		points = points + (this.totes * 4);
-	    	}
+    	if (this.totes != "") {
+    		points = this.totes * 2;  					// 2 points for each tote in this stack on scoring platform
+	    	if (this.totes > 0) {
+	    	 	if (this.bins) 	{
+	    			points = points + (this.totes * 4); // 4 points per level for bins on scored tote stacks
+	    			}
+	         	if (this.litter && this.bins)  	{
+	    			points = points + 6; 	    		// points for litter in a scored bin
+	    			}
+		    	 if (this.knockedover)  	{
+		    		points = 0;							// all that work for NOTHING!
+		    		}
+				}
+			}
+		return points;
+	};
 
-	        if (this.litter && this.bins)  	{
-	    		// points for litter in a scored bin
-	    		points = points + 6;
-	    	}
+	this.stackdata = function(){
+		var csvdata = "";
 
-	    	if (this.knockedover)  	{
-	    		points = 0;
-	    	}						// all that work for NOTHING!
+		csvData += this.totes + ",";
+		csvData += this.bins + ",";
+		csvData += this.litter + ",";
+		csvData += this.knockedover + ",";
 
-			return points;
-		 }
+		return csvData;
 
-}
+	};
 }
 
 /* constr
@@ -175,7 +170,7 @@ function autostacks(bots, totes, stackedtotes, bins, points)
     {
     	this.points = this.points + 8			// 8 points for bin set
     }
-    return this.points
+    return this.points;
 
 
 }
@@ -210,105 +205,20 @@ function update_data()
 */
 		// stacks data
 
-		Stack1.totes = document.getElementById('S1Totes').value;
-		Stack1.bins = document.getElementById('S1Bin').checked;
-		Stack1.litter = document.getElementById('S1Litter').checked;
-		Stack1.knockedover = document.getElementById('S1KnockedOver').checked;
+	for (var i = 1; i < 20; i++){
+			var toteval= "S" + i + "Totes";
+			var binval= "S" + i + "Bin";
+			var litterval= "S" + i + "Litter";
+			var KOval= "S" + i + "KnockedOver";
 
-		Stack2.totes = document.getElementById('S2Totes').value;
-		Stack2.bins = document.getElementById('S2Bin').checked;
-		Stack2.litter = document.getElementById('S2Litter').checked;
-		Stack2.knockedover = document.getElementById('S2KnockedOver').checked;
 
-		Stack3.totes = document.getElementById('S3Totes').value;
-		Stack3.bins = document.getElementById('S3Bin').checked;
-		Stack3.litter = document.getElementById('S3Litter').checked;
-		Stack3.knockedover = document.getElementById('S3KnockedOver').checked;
+		Stack[i].totes = document.getElementById(toteval).value;
+		Stack[i].bins = document.getElementById(binval).checked;
+		Stack[i].litter = document.getElementById(litterval).checked;
+		Stack[i].knockedover = document.getElementById(KOval).checked;
 
-		Stack4.totes = document.getElementById('S4Totes').value;
-		Stack4.bins = document.getElementById('S4Bin').checked;
-		Stack4.litter = document.getElementById('S4Litter').checked;
-		Stack4.knockedover = document.getElementById('S4KnockedOver').checked;
+		}
 
-		Stack5.totes = document.getElementById('S5Totes').value;
-		Stack5.bins = document.getElementById('S5Bin').checked;
-		Stack5.litter = document.getElementById('S5Litter').checked;
-		Stack5.knockedover = document.getElementById('S5KnockedOver').checked;
-
-		Stack6.totes = document.getElementById('S6Totes').value;
-		Stack6.bins = document.getElementById('S6Bin').checked;
-		Stack6.litter = document.getElementById('S6Litter').checked;
-		Stack6.knockedover = document.getElementById('S6KnockedOver').checked;
-
-		Stack7.totes = document.getElementById('S7Totes').value;
-		Stack7.bins = document.getElementById('S7Bin').checked;
-		Stack7.litter = document.getElementById('S7Litter').checked;
-		Stack7.knockedover = document.getElementById('S7KnockedOver').checked;
-
-		Stack8.totes = document.getElementById('S8Totes').value;
-		Stack8.bins = document.getElementById('S8Bin').checked;
-		Stack8.litter = document.getElementById('S8Litter').checked;
-		Stack8.knockedover = document.getElementById('S8KnockedOver').checked;
-
-		Stack9.totes = document.getElementById('S9Totes').value;
-		Stack9.bins = document.getElementById('S9Bin').checked;
-		Stack9.litter = document.getElementById('S9Litter').checked;
-		Stack9.knockedover = document.getElementById('S9KnockedOver').checked;
-
-		Stack10.totes = document.getElementById('S10Totes').value;
-		Stack10.bins = document.getElementById('S10Bin').checked;
-		Stack10.litter = document.getElementById('S10Litter').checked;
-		Stack10.knockedover = document.getElementById('S10KnockedOver').checked;
-
-		Stack11.totes = document.getElementById('S11Totes').value;
-		Stack11.bins = document.getElementById('S11Bin').checked;
-		Stack11.litter = document.getElementById('S11Litter').checked;
-		Stack11.knockedover = document.getElementById('S11KnockedOver').checked;
-
-		Stack12.totes = document.getElementById('S12Totes').value;
-		Stack12.bins = document.getElementById('S12Bin').checked;
-		Stack12.litter = document.getElementById('S12Litter').checked;
-		Stack12.knockedover = document.getElementById('S12KnockedOver').checked;
-
-		Stack13.totes = document.getElementById('S13Totes').value;
-		Stack13.bins = document.getElementById('S13Bin').checked;
-		Stack13.litter = document.getElementById('S13Litter').checked;
-		Stack13.knockedover = document.getElementById('S13KnockedOver').checked;
-
-		Stack14.totes = document.getElementById('S14Totes').value;
-		Stack14.bins = document.getElementById('S14Bin').checked;
-		Stack14.litter = document.getElementById('S14Litter').checked;
-		Stack14.knockedover = document.getElementById('S14KnockedOver').checked;
-
-		Stack15.totes = document.getElementById('S15Totes').value;
-		Stack15.bins = document.getElementById('S15Bin').checked;
-		Stack15.litter = document.getElementById('S15Litter').checked;
-		Stack15.knockedover = document.getElementById('S15KnockedOver').checked;
-
-		Stack16.totes = document.getElementById('S16Totes').value;
-		Stack16.bins = document.getElementById('S16Bin').checked;
-		Stack16.litter = document.getElementById('S16Litter').checked;
-		Stack16.knockedover = document.getElementById('S16KnockedOver').checked;
-
-		Stack17.totes = document.getElementById('S17Totes').value;
-		Stack17.bins = document.getElementById('S17Bin').checked;
-		Stack17.litter = document.getElementById('S17Litter').checked;
-		Stack17.knockedover = document.getElementById('S17KnockedOver').checked;
-
-		Stack18.totes = document.getElementById('S18Totes').value;
-		Stack18.bins = document.getElementById('S18Bin').checked;
-		Stack18.litter = document.getElementById('S18Litter').checked;
-		Stack18.knockedover = document.getElementById('S18KnockedOver').checked;
-
-		Stack19.totes = document.getElementById('S19Totes').value;
-		Stack19.bins = document.getElementById('S19Bin').checked;
-		Stack19.litter = document.getElementById('S19Litter').checked;
-		Stack19.knockedover = document.getElementById('S19KnockedOver').checked;
-
-		Stack20.totes = document.getElementById('S20Totes').value;
-		Stack20.bins = document.getElementById('S20Bin').checked;
-		Stack20.litter = document.getElementById('S20Litter').checked;
-		Stack20.knockedover = document.getElementById('S20KnockedOver').checked;
 
     /* update display */
     disp_update();
@@ -328,37 +238,17 @@ function disp_update()
    /*  document.getElementById("auto_miss_display").innerHTML = auto_goals[1].points;  /* points missed in auton */
 
     /* teleop */
+	var totpoints = 0;
+	var newpoints = 0;
+   	for (var i = 1; i < 21; i++){
+			var pointval= "S" + i + "points";
+			newpoints = Stack[i].stackpoints();
+   			document.getElementById(pointval).innerHTML =  newpoints;
+			totpoints = totpoints + newpoints;
+		}
 
-   document.getElementById("S1points").innerHTML =  Stack1.stackpoints;  //stackpoints(Stack1.totes, Stack1.bins, Stack1.litter, Stack1.knockedover);
-   document.getElementById("S2points").innerHTML =  stackpoints(Stack2.totes, Stack2.bins, Stack2.litter, Stack2.knockedover);
-   document.getElementById("S3points").innerHTML =  stackpoints(Stack3.totes, Stack3.bins, Stack3.litter, Stack3.knockedover);
-   document.getElementById("S4points").innerHTML =  stackpoints(Stack4.totes, Stack4.bins, Stack4.litter, Stack4.knockedover);
-   document.getElementById("S5points").innerHTML =  stackpoints(Stack5.totes, Stack5.bins, Stack5.litter, Stack5.knockedover);
-   document.getElementById("S6points").innerHTML =  stackpoints(Stack6.totes, Stack6.bins, Stack6.litter, Stack6.knockedover);
-   document.getElementById("S7points").innerHTML =  stackpoints(Stack7.totes, Stack7.bins, Stack7.litter, Stack7.knockedover);
-   document.getElementById("S8points").innerHTML =  stackpoints(Stack8.totes, Stack8.bins, Stack8.litter, Stack8.knockedover);
-   document.getElementById("S9points").innerHTML =  stackpoints(Stack9.totes, Stack9.bins, Stack9.litter, Stack9.knockedover);
-   document.getElementById("S10points").innerHTML =  stackpoints(Stack10.totes, Stack10.bins, Stack10.litter, Stack10.knockedover);
 
-   document.getElementById("S11points").innerHTML =  stackpoints(Stack11.totes, Stack11.bins, Stack11.litter, Stack11.knockedover);
-   document.getElementById("S12points").innerHTML =  stackpoints(Stack12.totes, Stack12.bins, Stack12.litter, Stack12.knockedover);
-   document.getElementById("S13points").innerHTML =  stackpoints(Stack13.totes, Stack13.bins, Stack13.litter, Stack13.knockedover);
-   document.getElementById("S14points").innerHTML =  stackpoints(Stack14.totes, Stack14.bins, Stack14.litter, Stack14.knockedover);
-   document.getElementById("S15points").innerHTML =  stackpoints(Stack15.totes, Stack15.bins, Stack15.litter, Stack15.knockedover);
-   document.getElementById("S16points").innerHTML =  stackpoints(Stack16.totes, Stack16.bins, Stack16.litter, Stack16.knockedover);
-   document.getElementById("S17points").innerHTML =  stackpoints(Stack17.totes, Stack17.bins, Stack17.litter, Stack17.knockedover);
-   document.getElementById("S18points").innerHTML =  stackpoints(Stack18.totes, Stack18.bins, Stack18.litter, Stack18.knockedover);
-   document.getElementById("S19points").innerHTML =  stackpoints(Stack19.totes, Stack19.bins, Stack19.litter, Stack19.knockedover);
-   document.getElementById("S20points").innerHTML =  stackpoints(Stack20.totes, Stack20.bins, Stack20.litter, Stack20.knockedover);
-
-	document.getElementById("TotalPoints").innerHTML = document.getElementById('S1points').value + document.getElementById('S2points').value
-		+ document.getElementById('S3points').value + document.getElementById('S4points').value + document.getElementById('S5points').value
-		+ document.getElementById('S6points').value + document.getElementById('S7points').value + document.getElementById('S8points').value
-		+ document.getElementById('S9points').value + document.getElementById('S10points').value + document.getElementById('S11points').value
-		+ document.getElementById('S12points').value + document.getElementById('S13points').value + document.getElementById('S14points').value
-		+ document.getElementById('S15points').value + document.getElementById('S16points').value + document.getElementById('S17points').value
-		+ document.getElementById('S18points').value + document.getElementById('S19points').value + document.getElementById('S20points').value;
-
+	document.getElementById("TotalPoints").innerHTML = totpoints;
 
     switch(tele_driving)
     {
@@ -455,106 +345,10 @@ function save_data()
         tele_driving = document.getElementById('driving_ability').value;
 */
 
-		matchData += Stack1.totes + ",";
-		matchData += Stack1.bins + ",";
-		matchData += Stack1.litter + ",";
-		matchData += Stack1.knockedover + ",";
-
-		matchData += Stack2.totes + ",";
-		matchData += Stack2.bins + ",";
-		matchData += Stack2.litter + ",";
-		matchData += Stack2.knockedover + ",";
-
-		matchData += Stack3.totes + ",";
-		matchData += Stack3.bins + ",";
-		matchData += Stack3.litter + ",";
-		matchData += Stack3.knockedover + ",";
-
-		matchData += Stack4.totes + ",";
-		matchData += Stack4.bins + ",";
-		matchData += Stack4.litter + ",";
-		matchData += Stack4.knockedover + ",";
-
-		matchData += Stack5.totes + ",";
-		matchData += Stack5.bins + ",";
-		matchData += Stack5.litter + ",";
-		matchData += Stack5.knockedover + ",";
-
-		matchData += Stack6.totes + ",";
-		matchData += Stack6.bins + ",";
-		matchData += Stack6.litter + ",";
-		matchData += Stack6.knockedover + ",";
-
-		matchData += Stack7.totes + ",";
-		matchData += Stack7.bins + ",";
-		matchData += Stack7.litter + ",";
-		matchData += Stack7.knockedover + ",";
-
-		matchData += Stack8.totes + ",";
-		matchData += Stack8.bins + ",";
-		matchData += Stack8.litter + ",";
-		matchData += Stack8.knockedover + ",";
-
-		matchData += Stack9.totes + ",";
-		matchData += Stack9.bins + ",";
-		matchData += Stack9.litter + ",";
-		matchData += Stack9.knockedover + ",";
-
-		matchData += Stack10.totes + ",";
-		matchData += Stack10.bins + ",";
-		matchData += Stack10.litter + ",";
-		matchData += Stack10.knockedover + ",";
-
-		matchData += Stack11.totes + ",";
-		matchData += Stack11.bins + ",";
-		matchData += Stack11.litter + ",";
-		matchData += Stack11.knockedover + ",";
-
-		matchData += Stack12.totes + ",";
-		matchData += Stack12.bins + ",";
-		matchData += Stack12.litter + ",";
-		matchData += Stack12.knockedover + ",";
-
-		matchData += Stack13.totes + ",";
-		matchData += Stack13.bins + ",";
-		matchData += Stack13.litter + ",";
-		matchData += Stack13.knockedover + ",";
-
-		matchData += Stack14.totes + ",";
-		matchData += Stack14.bins + ",";
-		matchData += Stack14.litter + ",";
-		matchData += Stack14.knockedover + ",";
-
-		matchData += Stack15.totes + ",";
-		matchData += Stack15.bins + ",";
-		matchData += Stack15.litter + ",";
-		matchData += Stack15.knockedover + ",";
-
-		matchData += Stack16.totes + ",";
-		matchData += Stack16.bins + ",";
-		matchData += Stack16.litter + ",";
-		matchData += Stack16.knockedover + ",";
-
-		matchData += Stack17.totes + ",";
-		matchData += Stack17.bins + ",";
-		matchData += Stack17.litter + ",";
-		matchData += Stack17.knockedover + ",";
-
-		matchData += Stack18.totes + ",";
-		matchData += Stack18.bins + ",";
-		matchData += Stack18.litter + ",";
-		matchData += Stack18.knockedover + ",";
-
-		matchData += Stack19.totes + ",";
-		matchData += Stack19.bins + ",";
-		matchData += Stack19.litter + ",";
-		matchData += Stack19.knockedover + ",";
-
-		matchData += Stack20.totes + ",";
-		matchData += Stack20.bins + ",";
-		matchData += Stack20.litter + ",";
-		matchData += Stack20.knockedover + ",";
-
+		matchData += Stack1.csvData() + Stack2.csvData() + Stack3.csvData() + Stack4.csvData() + Stack5.csvData();
+		matchData += Stack6.csvData() + Stack7.csvData() + Stack8.csvData() + Stack9.csvData() + Stack10.csvData();
+		matchData += Stack11.csvData() + Stack12.csvData() + Stack13.csvData() + Stack14.csvData() + Stack15.csvData();
+		matchData += Stack16.csvData() + Stack17.csvData() + Stack18.csvData() + Stack19.csvData() + Stack20.csvData();
 
 
 
@@ -769,6 +563,69 @@ function Hide_Tabs()
 		$("#TeleOpDataButton").show(100,null);
 		$("#MatchDataButton").show(100,null);
 	}
+
+	// initialize HTML for stacks
+
+	for (var i = 1; i < 21; i++){
+		var litterid = "S"+ i + "Litter";
+		var binid = "S"+ i + "Bin";
+		var toteid = "S"+ i + "Totes";
+		var KOid = "S"+ i + "KnockedOver";
+		var pointid = "S"+ i + "points";
+
+		var htmlstring = "Stack" + i;
+		var headertxt = document.createTextNode(htmlstring);
+		var brk = document.createElement("BR");
+
+		var inLitter = document.createElement("input");
+			inLitter.setAttribute('type',"checkbox");
+			inLitter.setAttribute('id',litterid);
+			inLitter.setAttribute('onchange',"update_data();");
+
+		var inBin = document.createElement("input");
+			inBin.setAttribute('type',"checkbox");
+			inBin.setAttribute('id',binid);
+			inBin.setAttribute('onchange',"update_data();");
+
+		var inTote = document.createElement("input");
+			inTote.setAttribute('type',"number");
+			inTote.setAttribute('id',toteid);
+			inTote.setAttribute('onchange',"update_data();");
+			inTote.setAttribute('min',0);
+			inTote.setAttribute('max',6);
+			inTote.setAttribute('size',8);
+
+		var inKO = document.createElement("input");
+			inKO.setAttribute('type',"checkbox");
+			inKO.setAttribute('id',KOid);
+			inKO.setAttribute('onchange',"update_data();");
+
+		var inpoints = document.createElement("a");
+			inpoints.setAttribute('id', pointid);
+
+		document.getElementById(htmlstring).appendChild(headertxt);
+
+		document.getElementById(htmlstring).appendChild(inBin);
+		document.getElementById(htmlstring).appendChild(brk);
+		document.getElementById(htmlstring).appendChild(brk);
+
+		document.getElementById(htmlstring).appendChild(inLitter);
+		document.getElementById(htmlstring).appendChild(brk);
+		document.getElementById(htmlstring).appendChild(brk);
+
+		document.getElementById(htmlstring).appendChild(inTote);
+		document.getElementById(htmlstring).appendChild(brk);
+
+		document.getElementById(htmlstring).appendChild(inKO);
+		document.getElementById(htmlstring).appendChild(brk);
+		document.getElementById(htmlstring).appendChild(brk);
+
+		document.getElementById(htmlstring).appendChild(inpoints);
+		document.getElementById(htmlstring).appendChild(brk);
+
+	}
+
+
 }
 
 
