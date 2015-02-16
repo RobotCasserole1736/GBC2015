@@ -96,6 +96,7 @@ function stacks(totes, bins, litter, scored, knockedover)
 		csv_Data += this.totes + ",";
 		csv_Data += this.bins + ",";
 		csv_Data += this.litter + ",";
+		csv_Data += this.scored + ",";
 		csv_Data += this.knockedover + ",";
 		return csv_Data;
 	};
@@ -189,6 +190,7 @@ function update_data()
 
 
     /* teleop data */
+   	// human metrics
 
         humanfeedslitter = document.getElementById('human_feedsLitter').checked;
         humanthrowslitter = document.getElementById('human_throwsLitter').checked;
@@ -197,7 +199,17 @@ function update_data()
         driverability = document.getElementById('driving_ability').value;
         bin_feeding = document.getElementById('Tote_Feed_Speed').value;
 
-		// stacks data
+     // landfill metrics
+
+        litterinlandfill = document.getElementById('LitterInLandfill').value;
+        penaltylitter = document.getElementById('LitterPenalty').value;
+        binsfromsteps = document.getElementById('StepBins').value;
+
+        cooptoteset = document.getElementById('CoopToteSet').checked;
+        coopstack = document.getElementById('CoopStack').checked;
+
+
+		// stacks data metrics
 
 	for (var i = 1; i < 20; i++){
 			var toteval= "S" + i + "Totes";
@@ -318,47 +330,60 @@ function save_data()
     matchData += document.getElementById("match_number_in").value + ",";
     matchData += document.getElementById("match_type").value + ",";
   // autonomous tab fields
-/*
-		matchData += robotinautozone + ",";
+
+		matchData += ((robotinautozone) ? "T" : "F") + ",";
 		matchData += yellowTotesToAuto + ",";
 		matchData += goodYelStackedTotes + ",";
 		matchData += badYelStackedTotes + ",";
 		matchData += goodBinsToAuto  + ",";
 		matchData += badBinsToAuto + ",";
 		matchData += StartLocation + ",";
-*/
+
 
   // teleop tab fields
 
-  /*
-    matchData += (human_tote_loader) ? "T" : "F") + ",";
-    matchData += (human_litter_loader) ? "T" : "F") + ",";
-    matchData += (human_litter_thrower) ? "T" : "F") + ",";
+		// human metrics
+    matchData += ((human_tote_loader) ? "T" : "F") + ",";
+    matchData += ((human_litter_loader) ? "T" : "F") + ",";
+    matchData += ((human_litter_thrower) ? "T" : "F") + ",";
     matchData += document.getElementById("driving_ability").value + ",";
 
-        human_tote_loader = document.getElementById('Human_feedsTotes').checked;
-        human_litter_loader = document.getElementById('Human_feedsLitter').checked;
-        human_litter_thrower = document.getElementById('Human_throwsLitter').checked;
+		// landfill metrics
 
-        tele_driving = document.getElementById('driving_ability').value;
-*/
-	for (var i = 1; i < 21; i++){
+        matchData += document.getElementById('LitterInLandfill').value + ",";
+        matchData += document.getElementById('LitterPenalty').value + ",";
+        matchData += document.getElementById('StepBins').value + ",";
 
+        matchData += ((cooptoteset ) ? "T" : "F") + ",";
+        matchData += ((coopstack ) ? "T" : "F") + ",";
+
+
+		// stack metrics
+	for (var i = 1; i < 22; i++) {
 		matchData += Stack[i].csvData();
+		}
 
-}
+
+	// postmatch metric and comments
+
+	 matchData +=  document.getElementById("Overall_Rating").value + ",";
+
 
     var comments = document.getElementById("Comments").value;
-    comments = comments.replace(",","_"); //Get rid of commas so we don't mess up CSV
-    comments = comments.replace(/(\r\n|\n|\r)/gm,"  ");  // get rid of any newline characters
-    matchData += comments + "\n";  // add a single newline at the end of the data
+    comments = comments.replace(",","_"); 					//Get rid of commas so we don't mess up CSV
+    comments = comments.replace(/(\r\n|\n|\r)/gm,"  ");  	// get rid of any newline characters
+    matchData += comments + "\n";  							// add a single newline at the end of the data
+
+    // append all the above stuff to whatever is already captured...
+
     var existingData = localStorage.getItem("MatchData");
     if(existingData == null)
         localStorage.setItem("MatchData",matchData);
     else
         localStorage.setItem("MatchData",existingData + matchData);
     document.getElementById("HistoryCSV").value = localStorage.getItem("MatchData");
-/*
+
+/*		// this adds all the newly captured data to another field for sharing with other teams...
     var existingSharedData = localStorage.getItem("SharedData");
     if(existingSharedData == null)
         localStorage.setItem("SharedData",sharedData);
@@ -367,6 +392,7 @@ function save_data()
     document.getElementById("SharedDataCSV").value = localStorage.getItem("SharedData");
 */
 
+    reset_form();				// reset for next match...
 
 }
 
@@ -423,26 +449,77 @@ function save_pit_data()
 function reset_form()
 {
 // match data reset
-/*
+
     document.getElementById("team_number_in").value = "";
     document.getElementById("match_number_in").value = parseInt(document.getElementById("match_number_in").value) + 1;
 
 
 
-    document.getElementById("Location").value = "A";
 
 // autonomous data reset
 
+        document.getElementById('in_area').checked = false;
+        document.getElementById('AutoTotes').value = 0;
+
+        document.getElementById('AutoStacks_succeeded').value = 0;
+        document.getElementById('AutoStacks_failed').value = 0;
+
+        document.getElementById('AutoBins_succeeded').value = 0;
+        document.getElementById('AutoBins_failed').value = 0;
+
+	    document.getElementById("Location").value = "A";
 
 // teleop data reset
 
+	// human metrics
+        document.getElementById('human_feedsLitter').checked = false;
+        document.getElementById('human_throwsLitter').checked = false;
 
+        document.getElementById('human_feedsTotes').value = 0;
+        document.getElementById('driving_ability').value = 0;
+        document.getElementById('Tote_Feed_Speed').value = 0;
+	// landfill metrics
+
+        document.getElementById('LitterInLandfill').value = 0;
+        document.getElementById('LitterPenalty').value = 0;
+        document.getElementById('StepBins').value = 0;
+
+        document.getElementById('CoopToteSet').checked = false;
+        document.getElementById('CoopStack').checked = false;
+
+
+	// stacks data
+
+		for (var i = 1; i < 21; i++){
+			var toteval= "S" + i + "Totes";
+			var binval= "S" + i + "Bin";
+			var litterval= "S" + i + "Litter";
+			var scoreval= "S" + i + "scored";
+			var KOval= "S" + i + "KnockedOver";
+
+
+		document.getElementById(toteval).value = 0;
+		document.getElementById(binval).checked = false;
+		document.getElementById(litterval).checked = false;
+		document.getElementById(scoreval).checked = false;
+		document.getElementById(KOval).checked = false;
+
+		}
+
+//  post match data reset
+    	document.getElementById("Comments").value="";
+		document.getElementById("Overall_Rating").value  = 0;
 
 // pit data reset
     document.getElementById("drive_type").value = "";
     document.getElementById("drive_speed").value = "";
     document.getElementById("number_wheels").value = "";
-*/
+
+    document.getElementById("DriveTrain_Comments").value="";
+    document.getElementById("Shooter_Comments").value="";
+    document.getElementById("General_Comments").value="";
+
+	update_data();		// all clear, now update data so all calcs get cleared too.
 
 
 	/*
@@ -451,40 +528,13 @@ leftovers from last year - kept temporarily for reference...
 
 
 
-    document.getElementById("starting_ball").value = 0;
-    document.getElementById("floor_pickup").value = 0;
-
-    auto_score_stack = new Array();
-    tele_attempt_stack = new Array();
-
-    document.getElementById("starting_ball").checked = false;
-    document.getElementById("floor_pickup").checked = false;
-
-    tele_score_stack = new Array();
-    document.getElementById("Front_shoot").checked = false;
-    tele_goals[0] = new goal_t(0,0,0,0,0);
-    tele_goals[1] = new goal_t(0,0,0,0,0);
-
-    penalty_stack = new Array();
-    penalty = 0;
-    technical = 0;
     document.getElementById("Comments").value="";
 
     document.getElementById("low_pass").checked = false;
-    document.getElementById("high_pass").checked = false;
-    document.getElementById("high_goal").checked = false;
-    document.getElementById("low_goal").checked = false;
-    document.getElementById("low_top").checked = false;
-    document.getElementById("truss_throw").value = 0;
-    document.getElementById("pass_catch").checked = false;
-    document.getElementById("truss_catch").checked = false;
     document.getElementById("defense").value = 0;
 
-    document.getElementById("DriveTrain_Comments").value="";
-    document.getElementById("Shooter_Comments").value="";
-    document.getElementById("General_Comments").value="";
     */
-    update_data();
+
 }
 
 
