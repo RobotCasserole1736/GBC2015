@@ -118,8 +118,8 @@
             <!-- ------------------------------------- -->
 
             <!-- Need to add starting location selector here -->
-            <div  class=div2>
-              <div id="AutonomousScoring">
+
+              <div id="AutonomousScoring" class=div3>
                 Robot to Auto Zone: <input type="checkbox" name="in_area" id="in_area" onchange="update_data();"> <br><br>
                	Yellow Totes to Auto Zone:	<input type="number" name="AutoTotes" id="AutoTotes" min=0 max =3 size=8 onchange="update_data();" /><br>
 				Succeeded | Failed  <br>
@@ -129,12 +129,12 @@
                 Bins to Auto Zone:
                 	<input type="number" name="AutoBins_succeeded" id="AutoBins_succeeded" min=0 max=3 size=8 onchange="update_data();" />
                 	<input type="number" name="AutoBins_failed" id="AutoBins_failed" min=0 max=3 size=8 onchange="update_data();" /><br>
-
+					<br><br><br>
               </div>
-            </div>
-            <div id="StartLocation">
-             	<div  class=div2>
-             		                Starting Location :
+
+            <div id="StartLocation" class=div3>
+             	<div >
+             	Starting Location :
                  <select name="Location" id="Location" onchange="update_data();">
                     <option value="A">A</option>
                     <option value="B">B</option>
@@ -163,7 +163,7 @@
             			<a># Totes Fed: <input type="number" name="human_feedsTotes" min="0" max="30"  id="human_feedsTotes" onchange="update_data();"></a>
             			<br><br><br><br><br>
        			</div>
-				 <div class=div3>
+				   <div class=div3>
                       <div class=headerDivider>
                       	How's My Driving? :<a id="tele_driving_display">Little or No Movement</a>
                       		<div id="shortslider">
@@ -174,7 +174,7 @@
                       		<div id="shortslider">
                         		<input class="bar" type="range" id ="Tote_Feed_Speed" name="Tote_Feed_Speed" min="0" max="3" value ="0" onchange="update_data();">
                          		<span class="highlight"></span>
-                       	</div><br><br>
+                       		</div><br><br>
                       </div>
                     </div>
 
@@ -198,7 +198,8 @@
                       Stack# : <br>
                       Bin|Litter: <br><br>
                       Totes: <br><br>
-                      KnockOver|PTS:<br>
+                      Knockover|scored:<br>
+                      Points: <br>
                     </div>
 
                     <div id=Stack1></div>
@@ -217,14 +218,16 @@
             	<div id="FrontField">
                   <h2>Front Scoring Platform:</h2>
                     <div class=div1><br>
-                       Total Points:<a id="TotalPoints"> </a>
+                       <h3>Total Points : <a id="TotalPoints"> </a></h3>
 						<br><br><br><br><br>
                     </div>
-                     <div class=div1>
+
+                    <div class=div1>
                       Stack# : <br>
                       Bin|Litter: <br><br>
                       Totes: <br><br>
-                      KnockOver|PTS:<br>
+                      Knockover|scored:<br>
+                      Points: <br>
                     </div>
 
                     <div id=Stack11></div>
@@ -288,8 +291,8 @@
 
 
         <div id="About">
-            2015 Scouting Tool for Recycle Rush. Updated each year by students and mentors from FRC 1736 Robot Casserole.
-            <br>Andrew Gurik :: Nick Dunne :: Aaron Thune :: Dan Thune :: Tim Delaney :: Zach Yarnot
+            2015 Scouting Tool for Recycle Rush. <br> Updated each year by students and mentors from FRC 1736 Robot Casserole.
+            <br>Aaron Thune ::  Zach Yarnot :: Andrew Gurik :: Nick Dunne :: Dan Thune :: Tim Delaney
         </div>
         <script type="text/javascript">
             $('ul.tabs').each(function(){

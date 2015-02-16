@@ -31,7 +31,7 @@ window.onload=function() { Hide_Tabs(); update_data();};
 
 	var Stack = [];
 	for (var i = 1; i < 22; i++){
-    	Stack.push( new stacks(0,0,0,0) );
+    	Stack.push( new stacks(0,0,0,0,0) );
     }
 
 //:)
@@ -60,14 +60,15 @@ window.onload=function() { Hide_Tabs(); update_data();};
  *   points (output?) - calculated points for this stack
  *
  * */
-function stacks(totes, bins, litter, knockedover)
+function stacks(totes, bins, litter, scored, knockedover)
 {
 	// constructor for stacks objects
 	this.totes= totes;											// stacks start with totes.
     this.bins = bins;											// bins on tote stacks
     this.litter = litter;										// litter in a stacked bin
-    this.knockedover = knockedover;
-  																// sadly no points if this is true...
+    this.scored = scored;										// stacked on the scoring platform!
+    this.knockedover = knockedover;								// sadly no points if this is true...
+
   	this.stackpoints = function()
   	{
     	var points = 0;
@@ -202,12 +203,14 @@ function update_data()
 			var toteval= "S" + i + "Totes";
 			var binval= "S" + i + "Bin";
 			var litterval= "S" + i + "Litter";
+			var scoreval= "S" + i + "scored";
 			var KOval= "S" + i + "KnockedOver";
 
 
 		Stack[i].totes = document.getElementById(toteval).value;
 		Stack[i].bins = document.getElementById(binval).checked;
 		Stack[i].litter = document.getElementById(litterval).checked;
+		Stack[i].scored = document.getElementById(scoreval).checked;
 		Stack[i].knockedover = document.getElementById(KOval).checked;
 
 		}
@@ -237,7 +240,9 @@ function disp_update()
 			var pointval= "S" + i + "points";
 			newpoints = Stack[i].stackpoints();
    			document.getElementById(pointval).innerHTML =  newpoints;
-			totpoints = totpoints + newpoints;
+			if (Stack[i].scored) {
+			totpoints = totpoints + newpoints;			// increment total only if this stack marked scored
+			}
 		}
 
 
@@ -562,11 +567,14 @@ function Hide_Tabs()
 		var binid = "S"+ i + "Bin";
 		var toteid = "S"+ i + "Totes";
 		var KOid = "S"+ i + "KnockedOver";
+		var stackid = "S" + i + "stacked";
+		var scoreid = "S" + i + "scored";
 		var pointid = "S"+ i + "points";
+
 
 		var htmlstring = "Stack" + i;
 		var headertxt = document.createTextNode(htmlstring);
-		var brk = document.createElement("BR");
+		var brk = document.createElement("br");
 
 		var inLitter = document.createElement("input");
 			inLitter.setAttribute('type',"checkbox");
@@ -584,6 +592,7 @@ function Hide_Tabs()
 			inTote.setAttribute('onchange',"update_data();");
 			inTote.setAttribute('min',0);
 			inTote.setAttribute('max',6);
+			inTote.setAttribute('defaultvalue',0);
 			inTote.setAttribute('size',8);
 
 		var inKO = document.createElement("input");
@@ -591,17 +600,26 @@ function Hide_Tabs()
 			inKO.setAttribute('id',KOid);
 			inKO.setAttribute('onchange',"update_data();");
 
+		var instack = document.createElement("input");
+			instack.setAttribute('type',"checkbox");
+			instack.setAttribute('id',stackid);
+			instack.setAttribute('onchange',"update_data();");
+
+		var inscored = document.createElement("input");
+			inscored.setAttribute('type',"checkbox");
+			inscored.setAttribute('id',scoreid);
+			inscored.setAttribute('onchange',"update_data();");
+
 		var inpoints = document.createElement("a");
 			inpoints.setAttribute('id', pointid);
+			inpoints.setAttribute('width', "3.0em");
 
 		document.getElementById(htmlstring).appendChild(headertxt);
 
 		document.getElementById(htmlstring).appendChild(inBin);
 		document.getElementById(htmlstring).appendChild(brk);
-		document.getElementById(htmlstring).appendChild(brk);
 
 		document.getElementById(htmlstring).appendChild(inLitter);
-		document.getElementById(htmlstring).appendChild(brk);
 		document.getElementById(htmlstring).appendChild(brk);
 
 		document.getElementById(htmlstring).appendChild(inTote);
@@ -609,10 +627,16 @@ function Hide_Tabs()
 
 		document.getElementById(htmlstring).appendChild(inKO);
 		document.getElementById(htmlstring).appendChild(brk);
+
+		//document.getElementById(htmlstring).appendChild(instack);
+		//document.getElementById(htmlstring).appendChild(brk);
+		//document.getElementById(htmlstring).appendChild(brk);
+
+		document.getElementById(htmlstring).appendChild(inscored);
 		document.getElementById(htmlstring).appendChild(brk);
 
-		document.getElementById(htmlstring).appendChild(inpoints);
 		document.getElementById(htmlstring).appendChild(brk);
+		document.getElementById(htmlstring).appendChild(inpoints);
 
 	}
 
