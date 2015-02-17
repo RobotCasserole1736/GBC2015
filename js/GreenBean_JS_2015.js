@@ -359,7 +359,7 @@ function save_data()
 
 
 		// stack metrics
-	for (var i = 1; i < 22; i++) {
+	for (var i = 1; i < 21; i++) {
 		matchData += Stack[i].csvData();
 		}
 
@@ -613,6 +613,7 @@ function Hide_Tabs()
 	// initialize HTML for stacks
 
 	for (var i = 1; i < 21; i++){
+
 		var litterid = "S"+ i + "Litter";
 		var binid = "S"+ i + "Bin";
 		var toteid = "S"+ i + "Totes";
@@ -689,6 +690,8 @@ function Hide_Tabs()
 		document.getElementById(htmlstring).appendChild(inpoints);
 
 	}
+		document.getElementById("match_number_in").value = 0;  // init this to zero
+		reset_form();	// init everything with a quick reset
 
 
 }
