@@ -9,7 +9,7 @@
  *
  ******************************************************************************/
 
-window.onload=function() { Hide_Tabs(); update_data();};
+window.onload=function() { Hide_Tabs(); InitStacks(); update_data();};
 
 /* global variables */
 
@@ -450,7 +450,7 @@ function reset_form()
 {
 // match data reset
 
-    document.getElementById("team_number_in").value = "";
+    document.getElementById("team_number_in").value = 0;
     document.getElementById("match_number_in").value = parseInt(document.getElementById("match_number_in").value) + 1;
 
 
@@ -519,7 +519,8 @@ function reset_form()
     document.getElementById("Shooter_Comments").value="";
     document.getElementById("General_Comments").value="";
 
-	update_data();		// all clear, now update data so all calcs get cleared too.
+	update_data();  // all clear, now update data so all calcs get cleared too.
+	Hide_Tabs();	// hide data tabs until they enter a team to scout
 
 
 	/*
@@ -602,14 +603,24 @@ function Hide_Tabs()
 		$("#TeleOpDataButton").hide(100,null);
 		$("#MatchDataButton").hide(100,null);
 	}
+	else if (document.getElementById("team_number_in").value == 0)
+	{
+		$("#PitDataButton").hide(100,null);
+		$("#AutonomousDataButton").hide(100,null);
+		$("#TeleOpDataButton").hide(100,null);
+		$("#MatchDataButton").hide(100,null);
+	}
 	else
 	{
 		$("#PitDataButton").hide(100,null);
 		$("#AutonomousDataButton").show(100,null);
 		$("#TeleOpDataButton").show(100,null);
 		$("#MatchDataButton").show(100,null);
-	}
 
+	}
+}
+
+function InitStacks() {
 	// initialize HTML for stacks
 
 	for (var i = 1; i < 21; i++){

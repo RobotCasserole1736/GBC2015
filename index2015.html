@@ -29,7 +29,7 @@
 	       		Team Number<br>
         	</div>
         	<div id="teamDisp">
-       			<input type="tel" name="team_number_in" id="team_number_in" placeholder="0" onchange="disp_update();">
+       			<input type="tel" name="team_number_in" id="team_number_in" placeholder="0" onchange="update_data(); Hide_Tabs();">
        		</div>
        	</div>
         <ul class='tabs'>
@@ -119,7 +119,14 @@
 
             <!-- Need to add starting location selector here -->
 
-              <div id="AutonomousScoring" class=div3>
+              <div id="AutonomousScoring" class=div3><br>
+             	Starting Location :
+                 <select name="Location" id="Location" onchange="update_data();">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                 </select><br><br>
                 Robot to Auto Zone: <input type="checkbox" name="in_area" id="in_area" onchange="update_data();"> <br><br>
                	Yellow Totes to Auto Zone:	<input type="number" name="AutoTotes" id="AutoTotes" min=0 max =3 size=8 onchange="update_data();" /><br>
 				Succeeded | Failed  <br>
@@ -127,23 +134,20 @@
                 	<input type="number" name="AutoStacks_succeeded" id="AutoStacks_succeeded" min=0 max =3 size=8 onchange="update_data();" />
                 	<input type="number" name="AutoStacks_failed" id="AutoStacks_failed" min=0 max =3 size=8 onchange="update_data();" /><br>
                 Bins to Auto Zone:
-                	<input type="number" name="AutoBins_succeeded" id="AutoBins_succeeded" min=0 max=3 size=8 onchange="update_data();" />
-                	<input type="number" name="AutoBins_failed" id="AutoBins_failed" min=0 max=3 size=8 onchange="update_data();" /><br>
-					<br><br><br>
+                	<input type="number" name="AutoBins_succeeded" id="stepBins_succeeded" min=0 max=3 size=8 onchange="update_data();" />
+                	<input type="number" name="AutoBins_failed" id="stepBins_failed" min=0 max=3 size=8 onchange="update_data();" /><br>
+					<br>
+                Bins from step:
+                	<input type="number" name="stepBins_succeeded" id="AutoBins_succeeded" min=0 max=3 size=8 onchange="update_data();" />
+                	<input type="number" name="stepBins_failed" id="AutoBins_failed" min=0 max=3 size=8 onchange="update_data();" /><br>
+				<br><br><br>
               </div>
 
             <div id="StartLocation" class=div3>
-             	<div >
-             	Starting Location :
-                 <select name="Location" id="Location" onchange="update_data();">
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                 </select> <br>
 
                 	<img src="img/Clip_FRC_Field_2015.jpg" height="450" width="350">
-               	</div>
+                	<br><br>
+
              </div>
         </div>
 
@@ -165,12 +169,12 @@
        			</div>
 				   <div class=div3>
                       <div class=headerDivider>
-                      	How's My Driving? :<a id="tele_driving_display">Little or No Movement</a>
+                      	&nbsp; How's My Driving? :&nbsp; <a id="tele_driving_display">Little or No Movement</a>
                       		<div id="shortslider">
                          		<input class="bar" type="range" id ="driving_ability" name="driving_ability" min="0" max="3" value ="0" onchange="update_data();">
                          		<span class="highlight"></span>
                        		</div>
-                      	<a>Tote Feeding Speed :  </a> <a id="ToteFeedSpeed">No Feeder</a>
+                      	&nbsp;&nbsp;Tote Feeding Speed :&nbsp;  <a id="ToteFeedSpeed">No Feeder</a>
                       		<div id="shortslider">
                         		<input class="bar" type="range" id ="Tote_Feed_Speed" name="Tote_Feed_Speed" min="0" max="3" value ="0" onchange="update_data();">
                          		<span class="highlight"></span>
