@@ -66,51 +66,52 @@
         	<!-- ------------------------------ -->
             <!-- ----------Features------------ -->
             <!-- ------------------------------ -->
-            <div id="FeatureDataStrings" align="right">
+
+         <div id="FeatureValues" >
+            <div id="FeatureDataStrings" class=div1>
             	Drive Types:<br><br>
             	Drive Speed:<br><br>
             	Number of Wheels:<br><br>
             	Totes and Bins: <br><br><br><br>
             </div>
-
-            <div id="FeatureValues">
-            	<select name="drive_type" id="drive_type">
+			<div id="drivedata" class=div3>
+             	<select name="drive_type" id="drive_type">
             		<option value="Standard">Standard</option>
             		<option value="Swerve">Swerve</option>
             		<option value="Mecanum">Mecanum</option>
             		<option value="Omni">Omni</option>
             		<option value="Other">Other</option>
             	</select><br>
+
             	<select name="drive_speed" id="drive_speed">
             		<option value="One">One</option>
             		<option value="Two">Two</option>
             		<option value="Other">Other</option>
             	</select><br>
+
             	<select name="number_wheels" id="number_wheels">
             		<option value="Four">Four</option>
             		<option value="Six">Six</option>
             		<option value="Eight">Eight</option>
             		<option value="Other">Other</option>
             	</select><br>
-            	Pickup Totes: <input type="checkbox" name="low_pass" id="low_pass">
-            	Stack Totes: <input type="checkbox" name="high_pass" id="high_pass">
-            	Pickup Bins: <input type="checkbox" name="low_pass" id="low_pass">
-            	Stack Bins on Tote Stacks: <input type="checkbox" name="high_pass" id="high_pass">
+            	Pickup Totes: <input type="checkbox" name="pickup_totes" id="pickup_totes"><br>
+            	Stack Totes: <input type="checkbox" name="stack_totes" id="stack_totes"><br>
+            	Pickup Bins: <input type="checkbox" name="pickup_bins" id="pickup_bins"><br>
+            	Stack Bins on Tote Stacks: <input type="checkbox" name="stack_bins_on_totes" id="stack_bins_on_totes">
+           	</div>
 
-           		<br><br>
-   	           <button id="SubmitPitReport" onclick="Submit_Pit_Report()">Submit Pit Report</button>
-
-            </div>
-           <div id="FeatureComments">
-	            <textarea placeholder="DriveTrain Comments" id="DriveTrain_Comments" class="Pit_Text_Field"></textarea>
-	            <br>
-	            <textarea placeholder="Shooter Comments" id="Shooter_Comments" class="Pit_Text_Field"></textarea>
-	            <br>
-	            <textarea placeholder="General Comments" id="General_Comments" class="Pit_Text_Field"></textarea>
-            <br>
-           </div>
-
+ 			<div class=div3>
+         		<div id="FeatureComments" >
+	            	<textarea placeholder="O--------------O &#13;&#10; ----------------- &#13;&#10; ---ROBOT--- &#13;&#10; ----------------- &#13;&#10; O-------------O" id="DriveTrain_Comments" class="Pit_Text_Field"></textarea>
+	            	<br>
+	            	<textarea placeholder="General Comments" id="General_Comments" class="Pit_Text_Field"></textarea>
+            		<br><br>
+           		</div>
+        	</div>
         </div>
+        <button id="SubmitPitReport" onclick="Submit_Pit_Report()">Submit Pit Report</button>
+
 
         <div id="AutonomousData">
             <!-- ------------------------------------- -->

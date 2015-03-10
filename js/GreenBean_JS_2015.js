@@ -401,39 +401,32 @@ function save_pit_data()
 
     var pitData = document.getElementById("scout_name_in").value + ",";
     pitData += document.getElementById("team_number_in").value + ",";
-    pitData += document.getElementById("match_number_in").value + ",";
-    pitData += document.getElementById("match_type").value + ",";
 // features tab datasave
 
-/*    pitData += document.getElementById("drive_type").value + ",";
+   pitData += document.getElementById("drive_type").value + ",";
     pitData += document.getElementById("drive_speed").value + ",";
     pitData += document.getElementById("number_wheels").value + ",";
-    pitData += (document.getElementById("low_pass").checked ? "T" : "F") + ","; // chkbox
-    pitData += (document.getElementById("high_pass").checked ? "T" : "F") + ","; // chkbox
-    pitData += (document.getElementById("high_goal").checked ? "T" : "F") + ",";  // chkbox
-    pitData += (document.getElementById("low_goal").checked ? "T" : "F") + ",";  // chkbox
-    pitData += (document.getElementById("low_top").checked ? "T" : "F") + ",";  // chkbox
-    pitData += document.getElementById("truss_throw").value + ",";
-    pitData += (document.getElementById("pass_catch").checked ? "T" : "F") + ","; // chkbox
-    pitData += (document.getElementById("truss_catch").checked ? "T" : "F") + ",";  // chkbox
-    pitData += document.getElementById("defense").value + ",";
-
-
+    pitData += (document.getElementById("pickup_totes").checked ? "T" : "F") + ","; // chkbox
+    pitData += (document.getElementById("stack_totes").checked ? "T" : "F") + ","; // chkbox
+    pitData += (document.getElementById("pickup_bins").checked ? "T" : "F") + ",";  // chkbox
+    pitData += (document.getElementById("stack_bins_on_totes").checked ? "T" : "F") + ",";  // chkbox
+    // pitData += (document.getElementById("low_top").checked ? "T" : "F") + ",";  // chkbox
+    // pitData += document.getElementById("truss_throw").value + ",";
+    // pitData += (document.getElementById("pass_catch").checked ? "T" : "F") + ","; // chkbox
+    // pitData += (document.getElementById("truss_catch").checked ? "T" : "F") + ",";  // chkbox
+    // pitData += document.getElementById("defense").value + ",";
+//
+//
     var comments = document.getElementById("DriveTrain_Comments").value;
     comments = comments.replace(",","_"); //Get rid of commas so we don't mess up CSV
     comments = comments.replace(/(\r\n|\n|\r)/gm,"  "); // get rid of any newline characters
-    pitData += comments + ",";
-
-    comments = document.getElementById("Shooter_Comments").value;
-     comments = comments.replace(",","_"); //Get rid of commas so we don't mess up CSV
-     comments = comments.replace(/(\r\n|\n|\r)/gm,"  "); // get rid of any newline characters
     pitData += comments + ",";
 
     comments = document.getElementById("General_Comments").value;
      comments = comments.replace(",","_"); //Get rid of commas so we don't mess up CSV
      comments = comments.replace(/(\r\n|\n|\r)/gm,"  "); // get rid of any newline characters
     pitData += comments + "\n";  // add a single newline at the end of the data
-*/
+
     var existingData = localStorage.getItem("PitData");
     if(existingData == null)
         localStorage.setItem("PitData",pitData);
@@ -518,6 +511,11 @@ function reset_form()
     document.getElementById("DriveTrain_Comments").value="";
     document.getElementById("Shooter_Comments").value="";
     document.getElementById("General_Comments").value="";
+
+    document.getElementById("pickup_totes").checked = false;
+    document.getElementById("stack_totes").checked = false;
+    document.getElementById("pickup_bins").checked = false;
+    document.getElementById("stack_bins_on_totes").checked = false;
 
 	update_data();  // all clear, now update data so all calcs get cleared too.
 	Hide_Tabs();	// hide data tabs until they enter a team to scout
