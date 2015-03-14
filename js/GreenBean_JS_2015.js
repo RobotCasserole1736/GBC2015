@@ -509,7 +509,6 @@ function reset_form()
     document.getElementById("number_wheels").value = "";
 
     document.getElementById("DriveTrain_Comments").value="";
-    document.getElementById("Shooter_Comments").value="";
     document.getElementById("General_Comments").value="";
 
     document.getElementById("pickup_totes").checked = false;
