@@ -137,10 +137,10 @@
                 	<input type="number" name="AutoStacks_failed" id="AutoStacks_failed" min=0 max =3 size=8 onchange="update_data();" /><br>
                 Bins to Auto Zone:
                 	<input type="number" name="AutoBins_succeeded" id="AutoBins_succeeded"  min=0 max=3 size=8 onchange="update_data();" />
-                	<input type="number" name="AutoBins_failed" id="AutoBins_failed"  min=0 max=3 size=8 onchange="update_data();" /><br>
+                	<input type="number" name="AutoBins_failed" id="AutoBins_failed" min=0 max=3 size=8 onchange="update_data();" /><br>
 					<br>
                 Bins from step:
-                	<input type="number" name="stepBins_succeeded" id="stepBins_succeeded" min=0 max=3 size=8 onchange="update_data();" />
+                	<input type="number" name="stepBins_succeeded" id="stepBins_succeeded"  min=0 max=3 size=8 onchange="update_data();" />
                 	<input type="number" name="stepBins_failed" id="stepBins_failed" min=0 max=3 size=8 onchange="update_data();" /><br>
 				<br><br><br>
               </div>
@@ -161,13 +161,14 @@
             <form name="BinFeeder" id="binfeeder">
               <div id="Human Player">
           		 <div class=div2><h2>Human Players:</h2></div>
-          		 <div class=div3><h2>Landfill and Step:</h2></div>
+          		 <div class=div3><h2>Robot Actions: </h2></div>
 				 <br>
-   				 <div class=div1>
-            		    <a>Feeds Litter: <input type="checkbox" name="human_feedsLitter" id="human_feedsLitter" onchange="update_data();"></a><br>
+   				 <div class=div4>
+           		    <a>Feeds Litter: <input type="checkbox" name="human_feedsLitter" id="human_feedsLitter" onchange="update_data();"></a><br>
             		    <a>Throws Litter: <input type="checkbox" name="human_throwsLitter" id="human_throwsLitter" onchange="update_data();"></a><br>
-            			<a># Totes Fed: <input type="number" name="human_feedsTotes" min="0" max="30"  id="human_feedsTotes" onchange="update_data();"></a>
-            			<br><br><br><br><br>
+						<div id=stacks> Litter Thrown:  <input type="number" name="litterInLandfill" id="LitterInLandfill" min="0" max="10" /></div>  <!-- retasked for Midwest -->
+						<div id=stacks> Litter Past LF line:  <input type="number" name="litterPenalty" id="LitterPenalty" min="0" max="10" /></div>  <!-- retasked for Midwest -->
+            			<br><br><br>
        			</div>
 				   <div class=div3>
                       <div class=headerDivider>
@@ -180,7 +181,9 @@
                       		<div id="shortslider">
                         		<input class="bar" type="range" id ="Tote_Feed_Speed" name="Tote_Feed_Speed" min="0" max="3" value ="0" onchange="update_data();">
                          		<span class="highlight"></span>
-                       		</div><br><br>
+ 	                       		</div>
+             					<a># Totes Fed: <input type="number" name="human_feedsTotes" min="0" max="30"  id="human_feedsTotes" onchange="update_data();"></a>
+								<br>
                       </div>
                     </div>
 
@@ -189,8 +192,20 @@
                    			<div id=stacks> Coop-ToteSet:   <input type="checkbox" name="coopToteSet" id="CoopToteSet"></div>
                     		<div id=stacks> Coop-Stack:   <input type="checkbox" name="coopStack" id="CoopStack"></div><br>
 							<div id=stacks> # Bins from Step:  <input type="number" name="stepBins" id="StepBins" min="0" max="4" /></div>
-							<div id=stacks> Litter in the Landfill:  <input type="number" name="litterInLandfill" id="LitterInLandfill" min="0" max="10" /></div>
-							<div id=stacks> Unprocessed Litter:  <input type="number" name="litterPenalty" id="LitterPenalty" min="0" max="10" /></div>
+							<br>
+			             	  Tote Loading :
+                 			<select name="ToteLoader" id="ToteLoader" onchange="update_data();">  <!-- added for Midwest -->
+                    			<option value="Landfill">Landfill</option>
+                   				<option value="Human">Human</option>
+                    			<option value="Both">Both</option>
+                 			</select><br>
+			             	  Bin Loading :
+                 			<select name="BinLoading" id="BinLoading" onchange="update_data();">  <!-- added for Midwest -->
+                    			<option value="None">Doesn't</option>
+                    			<option value="Horizontal">Horizontal</option>
+                   				<option value="Upright">Upright</option>
+                    			<option value="Either">Either</option>
+                 			</select>
 							<br><br>
                     	</div>
              		</div>
@@ -198,7 +213,7 @@
             </form>
 
             <div id="BackField">
-                    <h2>Back Scoring Platform:</h2>
+                    <h2>Scoring Platform:</h2>
 
                     <div class=div1>
                       Stack# : <br>
@@ -218,11 +233,13 @@
                     <div id=Stack8></div>
                     <div id=Stack9></div>
                     <div id=Stack10></div>
+                    <div id=Stack11></div>
+                    <div id=Stack12></div>
 
 				</div>
 				<br>
             	<div id="FrontField">
-                  <h2>Front Scoring Platform:</h2>
+                  <h2>Scoring Platform:</h2>
                     <div class=div1><br>
                        <h3>Total Points : <a id="TotalPoints"> </a></h3>
 						<br><br><br>
@@ -235,9 +252,6 @@
                       Knockover|scored:<br>
                       Points: <br>
                     </div>
-
-                    <div id=Stack11></div>
-                    <div id=Stack12></div>
                     <div id=Stack13></div>
                     <div id=Stack14></div>
                     <div id=Stack15></div>
